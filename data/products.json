@@ -1,0 +1,51 @@
+
+[
+  {
+    "name": "Cardamom",
+    "price": 250,
+    "stock": 10,
+    "category": "Spice"
+  },
+  {
+    "name": "Turmeric",
+    "price": 60,
+    "stock": 15,
+    "category": "Powder"
+  },
+  {
+    "name": "Black Pepper",
+    "price": 120,
+    "stock": 8,
+    "category": "Spice"
+  },
+  {
+    "name": "Cinnamon",
+    "price": 80,
+    "stock": 0,
+    "category": "Spice"
+  },
+  {
+    "name": "Clove",
+    "price": 100,
+    "stock": 12,
+    "category": "Spice"
+  },
+  {
+    "name": "Ginger Powder",
+    "price": 70,
+    "stock": 6,
+    "category": "Powder"
+  },
+  {
+    "name": "Bay Leaf",
+    "price": 40,
+    "stock": 0,
+    "category": "Leaf"
+  },
+  {
+    "name": "Nutmeg",
+    "price": 90,
+    "stock": 5,
+    "category": "Spice"
+  }
+]
