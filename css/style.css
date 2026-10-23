@@ -1,7 +1,8 @@
 
 /* =====================================
    EL HERBS AND SPICES SHOP
-   WEEK 2 - DAY 1
+   WEEK 2 - DAY 2
+   EVENT HANDLING
 ===================================== */
 
 * {
@@ -94,6 +95,11 @@ nav a:hover {
     background-color: #1d4130;
 }
 
+.shop-button:disabled {
+    background-color: #888888;
+    cursor: not-allowed;
+}
+
 /* General sections */
 
 .section {
@@ -111,13 +117,12 @@ nav a:hover {
     text-align: center;
 }
 
-/* DOM heading class */
+/* Day 1 DOM manipulation */
 
 .highlight-heading {
     background-color: #f3e7c9;
     padding: 12px;
     border-radius: 8px;
-    transition: background-color 0.3s ease;
 }
 
 /* Featured image */
@@ -139,7 +144,7 @@ nav a:hover {
     background-color: #f3e7c9;
 }
 
-/* Search and category controls */
+/* Search and category filter */
 
 .product-controls {
     display: flex;
@@ -164,6 +169,16 @@ nav a:hover {
     color: #555555;
 }
 
+/* Add to Cart message */
+
+.cart-message {
+    text-align: center;
+    color: #285943;
+    font-weight: bold;
+    min-height: 25px;
+    margin: 12px 0;
+}
+
 /* Product grid */
 
 .product-grid {
@@ -180,7 +195,14 @@ nav a:hover {
     padding: 20px 15px;
     text-align: center;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Day 2: JavaScript adds/removes this class on hover */
+
+.product-card.zoom {
+    transform: scale(1.04);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
 }
 
 .product-card h3 {
@@ -207,10 +229,10 @@ nav a:hover {
 
 .product-stock {
     font-size: 14px;
-    margin-bottom: 0;
+    margin-bottom: 12px;
 }
 
-/* Out-of-stock product */
+/* Stock statuses */
 
 .out-of-stock {
     border: 2px solid #c0392b;
@@ -221,8 +243,6 @@ nav a:hover {
     color: #a32121;
     font-weight: bold;
 }
-
-/* Other stock statuses */
 
 .in-stock .product-stock {
     color: #1e6338;
