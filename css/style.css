@@ -1,8 +1,8 @@
 
 /* =====================================
    EL HERBS AND SPICES SHOP
-   WEEK 2 - DAY 2
-   EVENT HANDLING
+   WEEK 2 - DAY 3
+   DYNAMIC LIST AND EVENT DELEGATION
 ===================================== */
 
 * {
@@ -117,7 +117,7 @@ nav a:hover {
     text-align: center;
 }
 
-/* Day 1 DOM manipulation */
+/* DOM heading class */
 
 .highlight-heading {
     background-color: #f3e7c9;
@@ -144,7 +144,7 @@ nav a:hover {
     background-color: #f3e7c9;
 }
 
-/* Search and category filter */
+/* Search and category controls */
 
 .product-controls {
     display: flex;
@@ -169,8 +169,6 @@ nav a:hover {
     color: #555555;
 }
 
-/* Add to Cart message */
-
 .cart-message {
     text-align: center;
     color: #285943;
@@ -179,7 +177,7 @@ nav a:hover {
     margin: 12px 0;
 }
 
-/* Product grid */
+/* Product cards */
 
 .product-grid {
     display: grid;
@@ -197,8 +195,6 @@ nav a:hover {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-
-/* Day 2: JavaScript adds/removes this class on hover */
 
 .product-card.zoom {
     transform: scale(1.04);
@@ -232,8 +228,6 @@ nav a:hover {
     margin-bottom: 12px;
 }
 
-/* Stock statuses */
-
 .out-of-stock {
     border: 2px solid #c0392b;
     background-color: #fff0ee;
@@ -257,8 +251,6 @@ nav a:hover {
     text-align: center;
     padding: 25px;
 }
-
-/* DOM practice button */
 
 .dom-practice {
     text-align: center;
@@ -321,6 +313,96 @@ form button {
     color: #285943;
 }
 
+/* =====================================
+   DAY 3: ADMIN TASK LIST
+===================================== */
+
+.admin-section {
+    padding-top: 40px;
+    padding-bottom: 50px;
+}
+
+.admin-panel {
+    max-width: 650px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 25px;
+    border: 1px solid #e2dfd5;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.admin-panel h2 {
+    color: #285943;
+    text-align: center;
+}
+
+.admin-panel > p {
+    text-align: center;
+}
+
+.task-form {
+    max-width: none;
+    margin: 25px 0 10px;
+}
+
+.task-form input {
+    width: 100%;
+}
+
+.task-form button {
+    align-self: flex-start;
+}
+
+.task-feedback {
+    min-height: 24px;
+    color: #285943;
+    text-align: center;
+}
+
+.task-counter {
+    font-weight: bold;
+    color: #285943;
+    margin-top: 25px;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background-color: #fffaf0;
+    border: 1px solid #e2dfd5;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.task-text {
+    flex: 1;
+}
+
+.delete-task-button {
+    background-color: #a83232;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.delete-task-button:hover {
+    background-color: #7f2020;
+}
+
 /* Footer */
 
 .site-footer {
@@ -354,5 +436,13 @@ form button {
 
     .product-grid {
         grid-template-columns: 1fr;
+    }
+
+    .admin-panel {
+        padding: 18px;
+    }
+
+    .task-item {
+        align-items: flex-start;
     }
 }

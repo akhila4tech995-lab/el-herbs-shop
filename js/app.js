@@ -1,13 +1,13 @@
 
 /* =============================================
    EL HERBS AND SPICES SHOP
-   WEEK 2 - DAY 2
-   EVENT HANDLING
+   WEEK 2 - DAYS 1, 2 AND 3
+   DOM, EVENTS AND EVENT DELEGATION
 ============================================= */
 
 
 /* =============================================
-   1. PRODUCT DATA
+   PRODUCT DATA
 ============================================= */
 
 const shopProducts = [
@@ -79,315 +79,384 @@ const shopProducts = [
 
 
 /* =============================================
-   2. SELECT HTML ELEMENTS
+   DAYS 1 AND 2: SHOP PAGE
 ============================================= */
+
+// This code runs only when productGrid exists.
+// It prevents errors on the separate admin page.
 
 const productGrid = document.querySelector("#productGrid");
-const pageHeading = document.querySelector("#pageHeading");
-const featuredImage = document.querySelector("#featuredImage");
 
-const searchInput = document.querySelector("#searchInput");
-const categoryFilter = document.querySelector("#categoryFilter");
-const productCount = document.querySelector("#productCount");
+if (productGrid) {
 
-const headingButton = document.querySelector("#headingButton");
-const changeImageButton = document.querySelector("#changeImageButton");
+    /* Select shop page elements */
 
-const cartMessage = document.querySelector("#cartMessage");
+    const pageHeading = document.querySelector("#pageHeading");
+    const featuredImage = document.querySelector("#featuredImage");
 
-const enquiryForm = document.querySelector("#enquiryForm");
-const formMessage = document.querySelector("#formMessage");
+    const searchInput = document.querySelector("#searchInput");
+    const categoryFilter = document.querySelector("#categoryFilter");
+    const productCount = document.querySelector("#productCount");
 
+    const headingButton = document.querySelector("#headingButton");
+    const changeImageButton = document.querySelector("#changeImageButton");
 
-/* =============================================
-   3. DAY 1: DOM MANIPULATION
-============================================= */
+    const cartMessage = document.querySelector("#cartMessage");
 
-function practiseDOMManipulation() {
-    pageHeading.textContent = "Explore Our Herbs and Spices";
-
-    // Toggle adds the class if absent and removes it if present.
-    pageHeading.classList.toggle("highlight-heading");
-}
-
-headingButton.addEventListener("click", practiseDOMManipulation);
+    const enquiryForm = document.querySelector("#enquiryForm");
+    const formMessage = document.querySelector("#formMessage");
 
 
-/* Change the featured image using setAttribute(). */
+    /* DAY 1: Change heading and toggle CSS class */
 
-let showingCardamomImage = true;
+    headingButton.addEventListener("click", function () {
+        pageHeading.textContent = "Explore Our Herbs and Spices";
 
-changeImageButton.addEventListener("click", function () {
-    if (showingCardamomImage) {
-        featuredImage.setAttribute("src", "images/turmeric.jpg");
-        featuredImage.setAttribute("alt", "Featured turmeric spice");
-    } else {
-        featuredImage.setAttribute("src", "images/cardamom.jpg");
-        featuredImage.setAttribute("alt", "Featured cardamom spice");
-    }
-
-    showingCardamomImage = !showingCardamomImage;
-});
-
-
-/* =============================================
-   4. RENDER PRODUCT CARDS
-============================================= */
-
-function renderProducts(list) {
-    productGrid.replaceChildren();
-
-    productCount.textContent = list.length + " product(s) found";
-
-    if (list.length === 0) {
-        const message = document.createElement("p");
-
-        message.classList.add("no-products");
-        message.textContent = "No matching products found.";
-
-        productGrid.appendChild(message);
-        return;
-    }
-
-    for (const product of list) {
-        const card = document.createElement("article");
-        card.classList.add("product-card");
-
-        const icon = document.createElement("div");
-        icon.classList.add("product-icon");
-        icon.textContent = product.icon;
-
-        const name = document.createElement("h3");
-        name.textContent = product.name;
-
-        const category = document.createElement("p");
-        category.classList.add("product-category");
-        category.textContent = "Category: " + product.category;
-
-        const price = document.createElement("p");
-        price.classList.add("product-price");
-        price.textContent = "₹" + product.price + " / 100g";
-
-        const stock = document.createElement("p");
-        stock.classList.add("product-stock");
-
-        if (product.stock === 0) {
-            card.classList.add("out-of-stock");
-            stock.textContent = "Out of Stock";
-        } else if (product.stock < 10) {
-            card.classList.add("low-stock");
-            stock.textContent = "Low Stock: " + product.stock;
-        } else {
-            card.classList.add("in-stock");
-            stock.textContent = "In Stock: " + product.stock;
-        }
-
-        // Create the Add to Cart button.
-        const addButton = document.createElement("button");
-        addButton.type = "button";
-        addButton.classList.add("shop-button");
-        addButton.textContent = "Add to Cart";
-
-        // Do not allow an out-of-stock product to be added.
-        if (product.stock === 0) {
-            addButton.disabled = true;
-            addButton.textContent = "Unavailable";
-        }
-
-        /*
-        DAY 2 - TASK 1: CLICK EVENT
-
-        The event object describes the event.
-        Three useful properties:
-        event.type   -> event name, such as "click"
-        event.target -> element that triggered the event
-        event.key    -> pressed key, mainly for keyboard events
-        */
-
-        addButton.addEventListener("click", function (event) {
-            console.log("Add to Cart event:", event);
-            console.log("Event type:", event.type);
-            console.log("Event target:", event.target);
-            console.log("Event key:", event.key);
-
-            cartMessage.textContent =
-                product.name + " selected! This is a demo; no order was saved.";
-        });
-
-        /*
-        DAY 2 - TASK 1: MOUSE HOVER EVENTS
-
-        mouseover runs when the pointer enters the card.
-        mouseout runs when the pointer leaves the card.
-        The zoom class applies the CSS transform effect.
-        */
-
-        card.addEventListener("mouseover", function (event) {
-            console.log("Mouse over event:", event);
-            console.log("Event type:", event.type);
-            console.log("Event target:", event.target);
-            console.log("Event key:", event.key);
-
-            card.classList.add("zoom");
-        });
-
-        card.addEventListener("mouseout", function (event) {
-            console.log("Mouse out event:", event);
-            console.log("Event type:", event.type);
-            console.log("Event target:", event.target);
-            console.log("Event key:", event.key);
-
-            card.classList.remove("zoom");
-        });
-
-        // Add all product elements to the card.
-        card.appendChild(icon);
-        card.appendChild(name);
-        card.appendChild(category);
-        card.appendChild(price);
-        card.appendChild(stock);
-        card.appendChild(addButton);
-
-        productGrid.appendChild(card);
-    }
-}
-
-
-/* =============================================
-   5. SEARCH AND CATEGORY FILTER
-============================================= */
-
-function filterProducts() {
-    const searchTerm = searchInput.value.trim().toLowerCase();
-    const selectedCategory = categoryFilter.value;
-
-    const filteredProducts = shopProducts.filter(function (product) {
-        const matchesSearch =
-            product.name.toLowerCase().includes(searchTerm);
-
-        const matchesCategory =
-            selectedCategory === "All" ||
-            product.category === selectedCategory;
-
-        return matchesSearch && matchesCategory;
+        pageHeading.classList.toggle("highlight-heading");
     });
 
-    renderProducts(filteredProducts);
+
+    /* DAY 1: Change image using setAttribute() */
+
+    let showingCardamomImage = true;
+
+    changeImageButton.addEventListener("click", function () {
+        if (showingCardamomImage) {
+            featuredImage.setAttribute("src", "images/turmeric.jpg");
+            featuredImage.setAttribute("alt", "Featured turmeric spice");
+        } else {
+            featuredImage.setAttribute("src", "images/cardamom.jpg");
+            featuredImage.setAttribute("alt", "Featured cardamom spice");
+        }
+
+        showingCardamomImage = !showingCardamomImage;
+    });
+
+
+    /* Render products */
+
+    function renderProducts(list) {
+        productGrid.replaceChildren();
+
+        productCount.textContent = list.length + " product(s) found";
+
+        if (list.length === 0) {
+            const message = document.createElement("p");
+
+            message.classList.add("no-products");
+            message.textContent = "No matching products found.";
+
+            productGrid.appendChild(message);
+            return;
+        }
+
+        for (const product of list) {
+            const card = document.createElement("article");
+            card.classList.add("product-card");
+
+            const icon = document.createElement("div");
+            icon.classList.add("product-icon");
+            icon.textContent = product.icon;
+
+            const name = document.createElement("h3");
+            name.textContent = product.name;
+
+            const category = document.createElement("p");
+            category.classList.add("product-category");
+            category.textContent = "Category: " + product.category;
+
+            const price = document.createElement("p");
+            price.classList.add("product-price");
+            price.textContent = "₹" + product.price + " / 100g";
+
+            const stock = document.createElement("p");
+            stock.classList.add("product-stock");
+
+            if (product.stock === 0) {
+                card.classList.add("out-of-stock");
+                stock.textContent = "Out of Stock";
+            } else if (product.stock < 10) {
+                card.classList.add("low-stock");
+                stock.textContent = "Low Stock: " + product.stock;
+            } else {
+                card.classList.add("in-stock");
+                stock.textContent = "In Stock: " + product.stock;
+            }
+
+            /* DAY 2: Add to Cart button */
+
+            const addButton = document.createElement("button");
+            addButton.type = "button";
+            addButton.classList.add("shop-button");
+            addButton.textContent = "Add to Cart";
+
+            if (product.stock === 0) {
+                addButton.disabled = true;
+                addButton.textContent = "Unavailable";
+            }
+
+            addButton.addEventListener("click", function (event) {
+                console.log("Add to Cart event:", event);
+                console.log("Event type:", event.type);
+                console.log("Event target:", event.target);
+                console.log("Event key:", event.key);
+
+                cartMessage.textContent =
+                    product.name +
+                    " selected! This is a demo; no order was saved.";
+            });
+
+            /* DAY 2: Hover events */
+
+            card.addEventListener("mouseover", function (event) {
+                console.log("Mouse over event:", event);
+                console.log("Event type:", event.type);
+                console.log("Event target:", event.target);
+                console.log("Event key:", event.key);
+
+                card.classList.add("zoom");
+            });
+
+            card.addEventListener("mouseout", function (event) {
+                console.log("Mouse out event:", event);
+                console.log("Event type:", event.type);
+                console.log("Event target:", event.target);
+                console.log("Event key:", event.key);
+
+                card.classList.remove("zoom");
+            });
+
+            card.appendChild(icon);
+            card.appendChild(name);
+            card.appendChild(category);
+            card.appendChild(price);
+            card.appendChild(stock);
+            card.appendChild(addButton);
+
+            productGrid.appendChild(card);
+        }
+    }
+
+
+    /* DAY 2: Search and category filter */
+
+    function filterProducts() {
+        const searchTerm =
+            searchInput.value.trim().toLowerCase();
+
+        const selectedCategory = categoryFilter.value;
+
+        const filteredProducts = shopProducts.filter(function (product) {
+            const matchesSearch =
+                product.name.toLowerCase().includes(searchTerm);
+
+            const matchesCategory =
+                selectedCategory === "All" ||
+                product.category === selectedCategory;
+
+            return matchesSearch && matchesCategory;
+        });
+
+        renderProducts(filteredProducts);
+    }
+
+    searchInput.addEventListener("input", filterProducts);
+
+    categoryFilter.addEventListener("change", filterProducts);
+
+
+    /* DAY 2: Enter and Escape keyboard events */
+
+    searchInput.addEventListener("keydown", function (event) {
+        console.log("Keyboard event:", event);
+        console.log("Event type:", event.type);
+        console.log("Event target:", event.target);
+        console.log("Event key:", event.key);
+
+        if (event.key === "Enter") {
+            filterProducts();
+
+            cartMessage.textContent =
+                "Search applied for: " + searchInput.value;
+        }
+
+        if (event.key === "Escape") {
+            searchInput.value = "";
+
+            filterProducts();
+
+            cartMessage.textContent = "Search box cleared.";
+        }
+    });
+
+
+    /* DAY 2: Form submission */
+
+    enquiryForm.addEventListener("submit", function (event) {
+        console.log("Form submit event:", event);
+        console.log("Event type:", event.type);
+        console.log("Event target:", event.target);
+        console.log("Event key:", event.key);
+
+        // Prevent the default form submission and page reload.
+        event.preventDefault();
+
+        formMessage.textContent =
+            "Thank you! The form was checked, but no enquiry was sent to a server.";
+
+        enquiryForm.reset();
+    });
+
+
+    // Display all products when the shop page opens.
+    renderProducts(shopProducts);
 }
 
-// Filter while the user types.
-searchInput.addEventListener("input", filterProducts);
-
 
 /* =============================================
-   6. DAY 2: KEYBOARD EVENTS
+   DAY 3: ADMIN TASK LIST
 ============================================= */
 
-/*
-keydown detects a key being pressed.
+// These elements exist only in admin.html.
 
-event.type   -> "keydown"
-event.target -> the search input
-event.key    -> the actual key, such as "Enter" or "Escape"
-*/
+const taskForm = document.querySelector("#taskForm");
+const taskInput = document.querySelector("#taskInput");
+const taskList = document.querySelector("#taskList");
+const taskCount = document.querySelector("#taskCount");
+const taskFeedback = document.querySelector("#taskFeedback");
 
-searchInput.addEventListener("keydown", function (event) {
-    console.log("Keyboard event:", event);
-    console.log("Event type:", event.type);
-    console.log("Event target:", event.target);
-    console.log("Event key:", event.key);
 
-    if (event.key === "Enter") {
-        // Apply the search when Enter is pressed.
-        filterProducts();
+if (taskForm && taskInput && taskList && taskCount && taskFeedback) {
 
-        cartMessage.textContent =
-            "Search applied for: " + searchInput.value;
+    /* Update the counter */
+
+    function updateTaskCounter() {
+        // Read the actual number of list items.
+        // This avoids accidentally concatenating strings.
+        const totalTasks = taskList.children.length;
+
+        taskCount.textContent = totalTasks;
     }
 
-    if (event.key === "Escape") {
-        // Clear the search when Escape is pressed.
-        searchInput.value = "";
 
-        // Refresh results using the selected category.
-        filterProducts();
+    /* TASK 1: Add a new task */
 
-        cartMessage.textContent = "Search box cleared.";
+    function addTask(taskText) {
+        const cleanedText = taskText.trim();
+
+        // Ignore empty or whitespace-only input.
+        if (cleanedText === "") {
+            taskFeedback.textContent = "Please enter a task first.";
+            return;
+        }
+
+        // Create a new list item.
+        const listItem = document.createElement("li");
+        listItem.classList.add("task-item");
+
+        // Add task text safely using textContent.
+        const taskLabel = document.createElement("span");
+        taskLabel.classList.add("task-text");
+        taskLabel.textContent = cleanedText;
+
+        // Create the Delete button.
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.classList.add("delete-task-button");
+        deleteButton.textContent = "Delete";
+        deleteButton.setAttribute("aria-label", "Delete task: " + cleanedText);
+
+        // Put the text and button inside the list item.
+        listItem.appendChild(taskLabel);
+        listItem.appendChild(deleteButton);
+
+        // Add the new item to the parent list.
+        taskList.appendChild(listItem);
+
+        // Clear the input and update the counter.
+        taskInput.value = "";
+        taskFeedback.textContent = "Task added successfully.";
+
+        updateTaskCounter();
+
+        taskInput.focus();
     }
-});
 
-// Also update results when the category changes.
-categoryFilter.addEventListener("change", filterProducts);
+
+    // Add tasks when the form is submitted.
+    // This also allows the user to press Enter in the input.
+    taskForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        addTask(taskInput.value);
+    });
+
+
+    /* =========================================
+       TASK 2: EVENT DELEGATION FOR DELETE
+    ========================================= */
+
+    /*
+    We attach ONE click listener to the parent taskList.
+
+    When a Delete button is clicked, the event bubbles up
+    from the button to taskList. We identify the clicked
+    Delete button and remove its parent list item.
+
+    This works even for task items created later.
+    */
+
+    taskList.addEventListener("click", function (event) {
+        console.log("Task list click event:", event);
+        console.log("Event type:", event.type);
+        console.log("Event target:", event.target);
+        console.log("Event key:", event.key);
+
+        // Check whether the click came from a Delete button.
+        const deleteButton = event.target.closest(".delete-task-button");
+
+        if (!deleteButton || !taskList.contains(deleteButton)) {
+            return;
+        }
+
+        // Find and remove the corresponding task item.
+        const taskItem = deleteButton.closest(".task-item");
+
+        if (taskItem) {
+            taskItem.remove();
+
+            taskFeedback.textContent = "Task deleted successfully.";
+
+            // Update the counter after deletion.
+            updateTaskCounter();
+        }
+    });
+
+
+    // Initialise the counter when the admin page opens.
+    updateTaskCounter();
+
+    console.log("Week 2 Day 3: Admin task list is ready.");
+}
 
 
 /* =============================================
-   7. DAY 2: FORM SUBMISSION
+   SELECTOR AND SECURITY NOTES
 ============================================= */
 
 /*
-addEventListener() lets us attach event handlers in JavaScript
-instead of mixing JavaScript into HTML with onclick attributes.
-It also allows more than one listener for an event.
+ID selector:
+document.querySelector("#taskList");
 
-event.preventDefault() stops the browser's default form
-submission, which would normally reload or navigate the page.
+Class selector:
+document.querySelector(".task-item");
+
+querySelectorAll() returns a NodeList, not one element.
+Loop through it to apply styles to all matching elements.
+
+textContent displays plain text.
+innerHTML interprets strings as HTML.
+
+Use textContent for user-provided text to avoid inserting
+untrusted HTML and introducing an XSS security risk.
 */
-
-enquiryForm.addEventListener("submit", function (event) {
-    console.log("Form submit event:", event);
-    console.log("Event type:", event.type);
-    console.log("Event target:", event.target);
-    console.log("Event key:", event.key);
-
-    // Stop the default form submission.
-    event.preventDefault();
-
-    formMessage.textContent =
-        "Thank you! The form was checked, but no enquiry was sent to a server.";
-
-    enquiryForm.reset();
-});
-
-
-/* =============================================
-   8. SELECTOR AND TEXT SAFETY NOTES
-============================================= */
-
-/*
-Correct ID selector:
-document.querySelector("#productGrid");
-
-Correct class selector:
-document.querySelector(".product-card");
-
-Incorrect:
-document.querySelectorAll(".product-card").style.color = "green";
-
-querySelectorAll() returns a NodeList. Loop through it:
-
-document.querySelectorAll(".product-card").forEach(function (card) {
-    card.style.color = "green";
-});
-
-textContent displays a value as plain text.
-innerHTML parses a string as HTML.
-
-For example:
-element.textContent = "<strong>Hello</strong>";
-displays the tags as text.
-
-element.innerHTML = "<strong>Hello</strong>";
-renders Hello in bold.
-
-Do not use innerHTML with untrusted user input because
-it can introduce cross-site scripting (XSS) vulnerabilities.
-*/
-
-
-/* =============================================
-   9. INITIALISE THE PAGE
-============================================= */
-
-renderProducts(shopProducts);
-
-console.log("Week 2 Day 2: Event handling is ready.");

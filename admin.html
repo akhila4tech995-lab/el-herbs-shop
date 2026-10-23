@@ -4,19 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Admin</title>
+    <title>Admin Task List - EL Herbs and Spices Shop</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>EL Herbs and Spices Shop - Admin</h1>
+
+    <header class="site-header">
+        <div class="container">
+            <h1>🌿 EL Herbs and Spices Shop</h1>
+            <p>Admin Task Management</p>
+
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="index.html#products">Our Products</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </div>
     </header>
-    <main>
-        <section>
-            <h2>Admin Dashboard</h2>
-            <p>Welcome to the shop administration page.</p>
-            <a href="index.html">Back to Shop</a>
+
+    <main class="container admin-section">
+        <section class="admin-panel">
+            <h2>Shop Task List</h2>
+
+            <p>
+                Add and manage the tasks needed to run the spice shop.
+            </p>
+
+            <form id="taskForm" class="task-form">
+                <label for="taskInput">Enter a shop task</label>
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    name="taskInput"
+                    placeholder="Example: Check cardamom stock"
+                    autocomplete="off"
+                >
+
+                <button type="submit" class="shop-button">
+                    Add Task
+                </button>
+            </form>
+
+            <p id="taskFeedback" class="task-feedback" aria-live="polite"></p>
+
+            <!-- Task counter -->
+            <p class="task-counter">
+                Total tasks: <span id="taskCount">0</span>
+            </p>
+
+            <!-- Task 1: required empty list -->
+            <ul id="taskList" class="task-list"></ul>
         </section>
     </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 EL Herbs and Spices Shop. All rights reserved.</p>
+    </footer>
+
+    <!-- Reuse the existing JavaScript file -->
+    <script src="js/app.js"></script>
 </body>
 </html>
