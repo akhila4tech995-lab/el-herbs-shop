@@ -6,9 +6,9 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f7f4e9;
-    color: #263b2b;
     line-height: 1.6;
+    color: #263b2b;
+    background-color: #f7f4e9;
 }
 
 .site-header {
@@ -32,8 +32,8 @@ body {
 
 .site-header nav a {
     color: white;
-    text-decoration: none;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .site-header nav a:hover {
@@ -48,7 +48,7 @@ body {
 section {
     margin-bottom: 32px;
     padding: 22px;
-    background-color: white;
+    background: white;
     border-radius: 12px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
 }
@@ -63,14 +63,19 @@ button {
     padding: 10px 16px;
     border: none;
     border-radius: 6px;
-    background-color: #287747;
     color: white;
+    background: #287747;
     font-size: 15px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #194d2d;
+    background: #194d2d;
+}
+
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
 }
 
 input,
@@ -82,6 +87,13 @@ textarea {
     border: 1px solid #bdcbbb;
     border-radius: 6px;
     font: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #8bbd91;
+    outline-offset: 1px;
 }
 
 label {
@@ -111,7 +123,7 @@ label {
     padding: 18px;
     border: 1px solid #d9e4d6;
     border-radius: 10px;
-    background-color: #fffdf6;
+    background: #fffdf6;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -125,17 +137,17 @@ label {
 }
 
 .stock-status {
-    font-weight: bold;
     color: #287747;
-}
-
-.out-of-stock .stock-status {
-    color: #b42318;
+    font-weight: bold;
 }
 
 .out-of-stock {
     border-color: #d99a94;
-    background-color: #fff4f2;
+    background: #fff4f2;
+}
+
+.out-of-stock .stock-status {
+    color: #b42318;
 }
 
 .price {
@@ -163,19 +175,30 @@ td {
 
 th {
     color: white;
-    background-color: #287747;
+    background: #287747;
 }
 
 tr:nth-child(even) {
-    background-color: #f4f7ef;
+    background: #f4f7ef;
 }
 
 .error-message {
     display: block;
+    min-height: 0;
     margin-top: -10px;
     margin-bottom: 10px;
     color: #b42318;
     font-size: 14px;
+}
+
+input.invalid,
+textarea.invalid {
+    border: 2px solid #b42318;
+}
+
+input.valid,
+textarea.valid {
+    border: 2px solid #287747;
 }
 
 #formMessage,
@@ -189,12 +212,21 @@ tr:nth-child(even) {
     padding: 16px;
     border-left: 5px solid #287747;
     border-radius: 6px;
-    background-color: #f4f7ef;
+    background: #f4f7ef;
     overflow-wrap: anywhere;
 }
 
 .analysis-panel p {
     margin: 8px 0;
+}
+
+.safe-output {
+    padding: 10px;
+    min-height: 42px;
+    border: 1px solid #d8dfd3;
+    border-radius: 6px;
+    background: white;
+    overflow-wrap: anywhere;
 }
 
 /* Day 3: Admin task list */
@@ -207,7 +239,7 @@ tr:nth-child(even) {
 .admin-panel {
     padding: 20px;
     border-radius: 10px;
-    background-color: white;
+    background: white;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
 }
 
@@ -240,7 +272,7 @@ tr:nth-child(even) {
     padding: 12px;
     border: 1px solid #d9e4d6;
     border-radius: 6px;
-    background-color: #fffdf6;
+    background: #fffdf6;
 }
 
 .task-text {
@@ -249,18 +281,18 @@ tr:nth-child(even) {
 
 .delete-task-button {
     flex-shrink: 0;
-    background-color: #b42318;
+    background: #b42318;
 }
 
 .delete-task-button:hover {
-    background-color: #801b14;
+    background: #801b14;
 }
 
 .site-footer {
     padding: 18px;
     text-align: center;
     color: white;
-    background-color: #245c3a;
+    background: #245c3a;
 }
 
 @media (max-width: 600px) {

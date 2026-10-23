@@ -1,7 +1,10 @@
 
 "use strict";
 
-// SHOP PRODUCT DATA
+// ==================================================
+// PRODUCT DATA
+// ==================================================
+
 const shopProducts = [
     { name: "Cardamom", price: 250, stock: 10, category: "Spice" },
     { name: "Turmeric", price: 60, stock: 15, category: "Powder" },
@@ -13,10 +16,9 @@ const shopProducts = [
     { name: "Nutmeg", price: 90, stock: 5, category: "Spice" }
 ];
 
-// --------------------------------------------------
-// SHOP PAGE FEATURES
-// This block runs only when productGrid exists.
-// --------------------------------------------------
+// ==================================================
+// SHOP PAGE: DAY 1, DAY 2 AND DAY 4
+// ==================================================
 
 const productGrid = document.querySelector("#productGrid");
 
@@ -30,14 +32,12 @@ if (productGrid) {
     const productCount = document.querySelector("#productCount");
     const cartMessage = document.querySelector("#cartMessage");
 
-    // Day 1: Change heading text with textContent.
     if (headingButton && pageHeading) {
         headingButton.addEventListener("click", function () {
             pageHeading.textContent = "Welcome to EL Herbs and Spices!";
         });
     }
 
-    // Day 1: Change an image attribute with setAttribute.
     if (changeImageButton && featuredImage) {
         let showTurmeric = false;
 
@@ -54,11 +54,11 @@ if (productGrid) {
         });
     }
 
-    // Render product cards from an array.
-    function renderProducts(list) {
+    // Build product cards dynamically using createElement().
+    function renderProducts(products) {
         productGrid.textContent = "";
 
-        list.forEach(function (product) {
+        products.forEach(function (product) {
             const card = document.createElement("article");
             card.classList.add("product-card");
 
@@ -78,19 +78,17 @@ if (productGrid) {
 
             const stock = document.createElement("p");
             stock.classList.add("stock-status");
-            stock.textContent =
-                product.stock > 0
-                    ? "In stock: " + product.stock
-                    : "Out of stock";
+            stock.textContent = product.stock > 0
+                ? "In stock: " + product.stock
+                : "Out of stock";
 
             const cartButton = document.createElement("button");
             cartButton.type = "button";
             cartButton.textContent = "Add to Cart";
             cartButton.disabled = product.stock === 0;
 
-            // Event handler for each product's Add to Cart button.
             cartButton.addEventListener("click", function (event) {
-                console.log("Cart click event:", event);
+                console.log("Cart event:", event);
                 console.log("Event type:", event.type);
                 console.log("Event target:", event.target);
 
@@ -102,31 +100,25 @@ if (productGrid) {
 
             card.append(name, price, category, stock, cartButton);
             productGrid.appendChild(card);
+
+            card.addEventListener("mouseenter", function (event) {
+                console.log("Mouse event:", event);
+                card.classList.add("zoom");
+            });
+
+            card.addEventListener("mouseleave", function () {
+                card.classList.remove("zoom");
+            });
         });
 
         if (productCount) {
             productCount.textContent =
-                "Showing " + list.length + " of " +
+                "Showing " + products.length + " of " +
                 shopProducts.length + " products";
         }
-
-        // Day 2: Hover over a card to add/remove the zoom class.
-        const productCards = productGrid.querySelectorAll(".product-card");
-
-        productCards.forEach(function (card) {
-            card.addEventListener("mouseenter", function (event) {
-                console.log("Mouse enter event:", event);
-                card.classList.add("zoom");
-            });
-
-            card.addEventListener("mouseleave", function (event) {
-                console.log("Mouse leave event:", event);
-                card.classList.remove("zoom");
-            });
-        });
     }
 
-    // Day 4: Use filter() to combine search and category selection.
+    // Day 4: Combine search and category filtering.
     function filterProducts() {
         const searchTerm = searchInput
             ? searchInput.value.trim().toLowerCase()
@@ -137,9 +129,8 @@ if (productGrid) {
             : "all";
 
         const filteredProducts = shopProducts.filter(function (product) {
-            const matchesSearch = product.name
-                .toLowerCase()
-                .includes(searchTerm);
+            const matchesSearch =
+                product.name.toLowerCase().includes(searchTerm);
 
             const matchesCategory =
                 selectedCategory === "all" ||
@@ -152,13 +143,11 @@ if (productGrid) {
     }
 
     if (searchInput) {
-        // Live filtering as the user types.
         searchInput.addEventListener("input", filterProducts);
 
-        // Day 2: Enter filters; Escape clears the search field.
         searchInput.addEventListener("keydown", function (event) {
             console.log("Keyboard event:", event);
-            console.log("Key pressed:", event.key);
+            console.log("Pressed key:", event.key);
 
             if (event.key === "Enter") {
                 filterProducts();
@@ -175,124 +164,59 @@ if (productGrid) {
         categoryFilter.addEventListener("change", filterProducts);
     }
 
-    // Day 2: Enquiry form demo.
-    const enquiryForm = document.querySelector("#enquiryForm");
+    renderProducts(shopProducts);
 
-    if (enquiryForm) {
-        enquiryForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            console.log("Enquiry submit event:", event);
+    // Day 4: Product array methods.
+    const productArrayResults =
+        document.querySelector("#productArrayResults");
 
-            const customerName = document.querySelector("#customerName");
-            const customerEmail = document.querySelector("#customerEmail");
-            const customerMessage = document.querySelector("#customerMessage");
-            const formMessage = document.querySelector("#formMessage");
-
-            const nameError = document.querySelector("#nameError");
-            const emailError = document.querySelector("#emailError");
-            const messageError = document.querySelector("#messageError");
-
-            // Reset previous messages.
-            if (nameError) nameError.textContent = "";
-            if (emailError) emailError.textContent = "";
-            if (messageError) messageError.textContent = "";
-            if (formMessage) formMessage.textContent = "";
-
-            let isValid = true;
-
-            if (!customerName.value.trim()) {
-                if (nameError) nameError.textContent = "Please enter your name.";
-                isValid = false;
-            }
-
-            if (!customerEmail.value.trim()) {
-                if (emailError) emailError.textContent = "Please enter your email.";
-                isValid = false;
-            } else if (!customerEmail.validity.valid) {
-                if (emailError) emailError.textContent = "Please enter a valid email.";
-                isValid = false;
-            }
-
-            if (!customerMessage.value.trim()) {
-                if (messageError) messageError.textContent = "Please enter a message.";
-                isValid = false;
-            }
-
-            if (isValid && formMessage) {
-                formMessage.textContent =
-                    "Thank you, " + customerName.value.trim() +
-                    "! Your demo enquiry is ready.";
-                enquiryForm.reset();
-            }
-        });
-    }
-
-    // Day 4: Product array-method practice.
-    function showProductArrayAnalysis() {
-        const output = document.querySelector("#productArrayResults");
-
-        if (!output) return;
-
-        // map(): get an array containing product names.
+    if (productArrayResults) {
         const productNames = shopProducts.map(function (product) {
             return product.name;
         });
 
-        // filter(): keep only products that have stock.
         const inStockProducts = shopProducts.filter(function (product) {
             return product.stock > 0;
         });
 
-        // reduce(): calculate the total stock value.
-        // Stock value = price per 100g multiplied by stock quantity.
         const totalStockValue = shopProducts.reduce(function (total, product) {
             return total + product.price * product.stock;
         }, 0);
 
-        // some(): check whether at least one product is out of stock.
         const hasOutOfStockProduct = shopProducts.some(function (product) {
             return product.stock === 0;
         });
 
-        // every(): check whether every product has a non-negative price.
         const allPricesValid = shopProducts.every(function (product) {
             return product.price >= 0;
         });
 
-        output.textContent = "";
-
         const results = [
-            "Product names (map): " + productNames.join(", "),
-            "In-stock products (filter): " +
+            "Names (map): " + productNames.join(", "),
+            "In stock (filter): " +
                 inStockProducts.map(function (product) {
                     return product.name;
                 }).join(", "),
             "Total stock value (reduce): ₹" + totalStockValue,
-            "Any product out of stock? (some): " + hasOutOfStockProduct,
-            "Are all prices non-negative? (every): " + allPricesValid
+            "Any out of stock? (some): " + hasOutOfStockProduct,
+            "All prices valid? (every): " + allPricesValid
         ];
 
         results.forEach(function (result) {
             const paragraph = document.createElement("p");
             paragraph.textContent = result;
-            output.appendChild(paragraph);
+            productArrayResults.appendChild(paragraph);
         });
 
         console.log("Product names:", productNames);
         console.log("In-stock products:", inStockProducts);
         console.log("Total stock value:", totalStockValue);
-        console.log("Any out of stock:", hasOutOfStockProduct);
-        console.log("All prices valid:", allPricesValid);
     }
-
-    // Initial render and array analysis.
-    renderProducts(shopProducts);
-    showProductArrayAnalysis();
 }
 
-// --------------------------------------------------
-// DAY 4: STUDENT SCORE ARRAY METHODS
-// --------------------------------------------------
+// ==================================================
+// DAY 4: STUDENT ARRAY METHODS
+// ==================================================
 
 const students = [
     { name: "Anu", roll: 1, mark: 85 },
@@ -302,93 +226,270 @@ const students = [
     { name: "Ebin", roll: 5, mark: 35 }
 ];
 
-function showStudentAnalysis() {
-    const output = document.querySelector("#studentResults");
+const studentResults = document.querySelector("#studentResults");
 
-    // Admin page doesn't contain this section, so safely stop.
-    if (!output) return;
-
-    // map(): collect student names.
+if (studentResults) {
     const studentNames = students.map(function (student) {
         return student.name;
     });
 
-    // filter(): students who passed (mark 40 or above).
     const passedStudents = students.filter(function (student) {
         return student.mark >= 40;
     });
 
-    // reduce(): calculate total marks.
     const totalMarks = students.reduce(function (total, student) {
         return total + student.mark;
     }, 0);
 
     const averageMark = totalMarks / students.length;
 
-    // find(): find the student with the highest mark.
-    const topper = students.reduce(function (best, student) {
-        return student.mark > best.mark ? student : best;
-    }, students[0]);
+    // Day 4: find() returns the student with the highest mark.
+    const highestMark = students.reduce(function (highest, student) {
+        return student.mark > highest ? student.mark : highest;
+    }, 0);
 
-    // some(): check whether anyone failed.
+    const topper = students.find(function (student) {
+        return student.mark === highestMark;
+    });
+
     const anyFailed = students.some(function (student) {
         return student.mark < 40;
     });
 
-    // every(): check whether everyone passed.
     const everyonePassed = students.every(function (student) {
         return student.mark >= 40;
     });
 
-    // Object.keys() and Object.entries() on one student record.
     const sampleStudent = students[0];
     const studentKeys = Object.keys(sampleStudent);
     const studentEntries = Object.entries(sampleStudent);
 
     const results = [
-        "Student names (map): " + studentNames.join(", "),
-        "Students who passed (filter): " +
+        "Names (map): " + studentNames.join(", "),
+        "Passed (filter): " +
             passedStudents.map(function (student) {
                 return student.name;
             }).join(", "),
         "Total marks (reduce): " + totalMarks,
         "Average mark: " + averageMark.toFixed(2),
-        "Topper (find-style reduce): " + topper.name +
-            " with " + topper.mark + " marks",
-        "Has anyone failed? (some): " + anyFailed,
-        "Did everyone pass? (every): " + everyonePassed,
-        "First student's keys (Object.keys): " + studentKeys.join(", "),
-        "First student's entries (Object.entries): " +
+        "Topper (find): " + topper.name + " — " + topper.mark,
+        "Any failed? (some): " + anyFailed,
+        "Everyone passed? (every): " + everyonePassed,
+        "Object.keys: " + studentKeys.join(", "),
+        "Object.entries: " +
             studentEntries.map(function (entry) {
                 return entry[0] + ": " + entry[1];
             }).join(" | ")
     ];
 
-    output.textContent = "";
-
     results.forEach(function (result) {
         const paragraph = document.createElement("p");
         paragraph.textContent = result;
-        output.appendChild(paragraph);
+        studentResults.appendChild(paragraph);
     });
 
-    console.log("Student names:", studentNames);
+    console.log("Students:", students);
+    console.log("Names:", studentNames);
     console.log("Passed students:", passedStudents);
-    console.log("Total marks:", totalMarks);
-    console.log("Average mark:", averageMark);
+    console.log("Total:", totalMarks);
+    console.log("Average:", averageMark);
     console.log("Topper:", topper);
-    console.log("Any failed:", anyFailed);
-    console.log("Everyone passed:", everyonePassed);
     console.log("Object.keys:", studentKeys);
     console.log("Object.entries:", studentEntries);
 }
 
-showStudentAnalysis();
+// ==================================================
+// DAY 5: FORM VALIDATION
+// ==================================================
 
-// --------------------------------------------------
-// DAY 3: ADMIN TASK LIST
-// Runs only on admin.html.
-// --------------------------------------------------
+const enquiryForm = document.querySelector("#enquiryForm");
+
+if (enquiryForm) {
+    const nameInput = document.querySelector("#customerName");
+    const emailInput = document.querySelector("#customerEmail");
+    const passwordInput = document.querySelector("#customerPassword");
+    const confirmPasswordInput = document.querySelector("#confirmPassword");
+    const phoneInput = document.querySelector("#customerPhone");
+    const messageInput = document.querySelector("#customerMessage");
+    const formMessage = document.querySelector("#formMessage");
+
+    const errorFields = {
+        customerName: document.querySelector("#nameError"),
+        customerEmail: document.querySelector("#emailError"),
+        customerPassword: document.querySelector("#passwordError"),
+        confirmPassword: document.querySelector("#confirmPasswordError"),
+        customerPhone: document.querySelector("#phoneError"),
+        customerMessage: document.querySelector("#messageError")
+    };
+
+    // Check each field and display its own error message.
+    function validateField(input) {
+        const errorElement = errorFields[input.id];
+
+        if (!errorElement) return true;
+
+        let errorText = "";
+
+        // Day 5: Constraint Validation API.
+        // validity.valueMissing means a required field is empty.
+        if (input.validity.valueMissing) {
+            errorText = "This field is required.";
+        } else if (input.id === "customerName") {
+            if (input.value.trim() === "") {
+                errorText = "Please enter your name.";
+            }
+        } else if (input.id === "customerEmail") {
+            if (input.validity.typeMismatch) {
+                errorText = "Enter a valid email address.";
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
+                errorText = "Enter an email like name@example.com.";
+            }
+        } else if (input.id === "customerPassword") {
+            if (input.value.length < 8) {
+                errorText = "Password must contain at least 8 characters.";
+            }
+        } else if (input.id === "confirmPassword") {
+            if (input.value !== passwordInput.value) {
+                errorText = "Passwords do not match.";
+            }
+        } else if (input.id === "customerPhone") {
+            if (!/^\d{10}$/.test(input.value.trim())) {
+                errorText = "Enter exactly 10 digits.";
+            }
+        } else if (input.id === "customerMessage") {
+            if (input.value.trim() === "") {
+                errorText = "Please enter a message.";
+            }
+        }
+
+        errorElement.textContent = errorText;
+
+        input.classList.toggle("invalid", errorText !== "");
+        input.classList.toggle("valid", errorText === "");
+
+        return errorText === "";
+    }
+
+    // Day 5: setCustomValidity() adds a custom browser validation message.
+    function checkPasswordMatch() {
+        if (confirmPasswordInput.value !== passwordInput.value) {
+            confirmPasswordInput.setCustomValidity("Passwords do not match.");
+        } else {
+            confirmPasswordInput.setCustomValidity("");
+        }
+    }
+
+    const inputsToValidate = [
+        nameInput,
+        emailInput,
+        passwordInput,
+        confirmPasswordInput,
+        phoneInput,
+        messageInput
+    ];
+
+    // Live feedback as the user types.
+    inputsToValidate.forEach(function (input) {
+        input.addEventListener("input", function () {
+            if (input === passwordInput || input === confirmPasswordInput) {
+                checkPasswordMatch();
+
+                // Recheck both password fields when either one changes.
+                if (confirmPasswordInput.value !== "") {
+                    validateField(confirmPasswordInput);
+                }
+            }
+
+            validateField(input);
+
+            if (formMessage) {
+                formMessage.textContent = "";
+            }
+        });
+    });
+
+    // addEventListener() keeps event logic separate from HTML.
+    // preventDefault() stops the browser's default form submission.
+    enquiryForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        checkPasswordMatch();
+
+        let formIsValid = true;
+
+        inputsToValidate.forEach(function (input) {
+            if (!validateField(input)) {
+                formIsValid = false;
+            }
+        });
+
+        // Also check the browser's built-in validation state.
+        if (!enquiryForm.checkValidity()) {
+            formIsValid = false;
+        }
+
+        if (!formIsValid) {
+            formMessage.textContent =
+                "Please correct the errors before submitting.";
+            return;
+        }
+
+        formMessage.textContent =
+            "Validation successful! This demo does not send your data to a server.";
+
+        console.log("Form validation successful.");
+        enquiryForm.reset();
+
+        inputsToValidate.forEach(function (input) {
+            input.classList.remove("valid", "invalid");
+        });
+
+        Object.values(errorFields).forEach(function (errorElement) {
+            errorElement.textContent = "";
+        });
+
+        confirmPasswordInput.setCustomValidity("");
+    });
+
+    // Clear validation styling and messages when resetting the form.
+    enquiryForm.addEventListener("reset", function () {
+        setTimeout(function () {
+            inputsToValidate.forEach(function (input) {
+                input.classList.remove("valid", "invalid");
+            });
+
+            Object.values(errorFields).forEach(function (errorElement) {
+                errorElement.textContent = "";
+            });
+
+            if (formMessage) {
+                formMessage.textContent = "";
+            }
+
+            confirmPasswordInput.setCustomValidity("");
+        }, 0);
+    });
+}
+
+// ==================================================
+// DAY 5: SAFE TEXT RENDERING
+// ==================================================
+
+const safeTextInput = document.querySelector("#safeTextInput");
+const safeTextOutput = document.querySelector("#safeTextOutput");
+
+if (safeTextInput && safeTextOutput) {
+    safeTextInput.addEventListener("input", function (event) {
+        console.log("Text input event:", event);
+
+        // Safe: displays the user's input as ordinary text.
+        safeTextOutput.textContent = safeTextInput.value;
+    });
+}
+
+// ==================================================
+// DAY 3: ADMIN TASK LIST AND EVENT DELEGATION
+// ==================================================
 
 const taskForm = document.querySelector("#taskForm");
 const taskInput = document.querySelector("#taskInput");
@@ -398,8 +499,7 @@ const taskFeedback = document.querySelector("#taskFeedback");
 
 if (taskForm && taskInput && taskList && taskCount && taskFeedback) {
     function updateTaskCounter() {
-        const totalTasks = taskList.children.length;
-        taskCount.textContent = totalTasks;
+        taskCount.textContent = taskList.children.length;
     }
 
     function addTask(taskText) {
@@ -413,18 +513,16 @@ if (taskForm && taskInput && taskList && taskCount && taskFeedback) {
         const listItem = document.createElement("li");
         listItem.classList.add("task-item");
 
-        const taskTextElement = document.createElement("span");
-        taskTextElement.classList.add("task-text");
-
-        // textContent safely displays text without interpreting HTML.
-        taskTextElement.textContent = cleanedText;
+        const textElement = document.createElement("span");
+        textElement.classList.add("task-text");
+        textElement.textContent = cleanedText;
 
         const deleteButton = document.createElement("button");
         deleteButton.type = "button";
         deleteButton.classList.add("delete-task-button");
         deleteButton.textContent = "Delete";
 
-        listItem.append(taskTextElement, deleteButton);
+        listItem.append(textElement, deleteButton);
         taskList.appendChild(listItem);
 
         taskInput.value = "";
@@ -437,8 +535,7 @@ if (taskForm && taskInput && taskList && taskCount && taskFeedback) {
         addTask(taskInput.value);
     });
 
-    // Event delegation: one click listener handles all Delete buttons,
-    // including buttons created after this listener was registered.
+    // One parent listener handles Delete buttons created later.
     taskList.addEventListener("click", function (event) {
         const deleteButton = event.target.closest(".delete-task-button");
 
