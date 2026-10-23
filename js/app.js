@@ -2,7 +2,8 @@
 /*
 ==================================================
 EL HERBS AND SPICES SHOP
-DAY 2 + DAY 3 + DAY 4 JAVASCRIPT PRACTICE
+DAY 2 + DAY 3 + DAY 4 + DAY 5
+JAVASCRIPT PRACTICE
 ==================================================
 */
 
@@ -138,15 +139,14 @@ function makeCartCounter() {
 
 const addToCart = makeCartCounter();
 
-console.log("Items in cart after first addition:", addToCart());
-console.log("Items in cart after second addition:", addToCart());
-console.log("Items in cart after third addition:", addToCart());
+console.log("Cart after first addition:", addToCart());
+console.log("Cart after second addition:", addToCart());
+console.log("Cart after third addition:", addToCart());
 
 console.log("Day 3 JavaScript practice completed!");
 
 // ==================================================
 // DAY 4 - TASK 1: IF, ELSE IF, ELSE
-// Check stock status of every product
 // ==================================================
 
 console.log("----- DAY 4: STOCK STATUS -----");
@@ -163,7 +163,6 @@ for (const product of products) {
 
 // ==================================================
 // DAY 4 - TASK 2: SWITCH
-// Display a message for each product category
 // ==================================================
 
 console.log("----- DAY 4: PRODUCT CATEGORIES -----");
@@ -193,7 +192,6 @@ for (const product of products) {
 
 // ==================================================
 // DAY 4 - TASK 3: FOR LOOP
-// Display all product names
 // ==================================================
 
 console.log("----- DAY 4: FOR LOOP -----");
@@ -204,7 +202,6 @@ for (let i = 0; i < products.length; i++) {
 
 // ==================================================
 // DAY 4 - TASK 4: WHILE LOOP
-// Display all product names
 // ==================================================
 
 console.log("----- DAY 4: WHILE LOOP -----");
@@ -218,7 +215,6 @@ while (i < products.length) {
 
 // ==================================================
 // DAY 4 - TASK 5: DO...WHILE LOOP
-// Display all product names
 // ==================================================
 
 console.log("----- DAY 4: DO...WHILE LOOP -----");
@@ -232,7 +228,6 @@ do {
 
 // ==================================================
 // DAY 4 - TASK 6: FOR...OF
-// Read product objects from the array
 // ==================================================
 
 console.log("----- DAY 4: FOR...OF LOOP -----");
@@ -244,7 +239,6 @@ for (const product of products) {
 
 // ==================================================
 // DAY 4 - TASK 7: FOR...IN
-// Read property names from one product object
 // ==================================================
 
 console.log("----- DAY 4: FOR...IN LOOP -----");
@@ -256,7 +250,6 @@ for (const key in products[0]) {
 
 // ==================================================
 // DAY 4 - TASK 8: CONTINUE
-// Skip products that are out of stock
 // ==================================================
 
 console.log("----- DAY 4: CONTINUE -----");
@@ -271,9 +264,6 @@ for (const product of products) {
 
 // ==================================================
 // DAY 4 - TASK 9: BREAK
-// Stop at the first product priced above ₹500
-// A separate demo item is used so our original
-// eight products and prices remain unchanged.
 // ==================================================
 
 console.log("----- DAY 4: BREAK -----");
@@ -301,5 +291,171 @@ for (const product of breakDemoProducts) {
 
 console.log("Day 4 JavaScript practice completed!");
 
+// ==================================================
+// DAY 5 - TASK 1: FUNCTION DECLARATION
+// ==================================================
 
+console.log("----- DAY 5: FUNCTIONS -----");
 
+function displayWelcomeMessage() {
+    console.log("Welcome to EL Herbs and Spices Shop!");
+}
+
+displayWelcomeMessage();
+
+// ==================================================
+// DAY 5 - TASK 2: FUNCTION WITH PARAMETERS
+// ==================================================
+
+function displayProduct(productName) {
+    console.log("Product selected:", productName);
+}
+
+displayProduct("Cardamom");
+displayProduct("Turmeric");
+displayProduct("Black Pepper");
+
+// ==================================================
+// DAY 5 - TASK 3: FUNCTION WITH RETURN
+// Calculate price including GST
+// ==================================================
+
+function calculatePriceWithGST(price) {
+    let totalPrice = price + (price * gstRate);
+    return totalPrice;
+}
+
+let cardamomPrice = calculatePriceWithGST(250);
+let turmericPrice = calculatePriceWithGST(60);
+
+console.log("Cardamom price with GST:", cardamomPrice);
+console.log("Turmeric price with GST:", turmericPrice);
+
+// ==================================================
+// DAY 5 - TASK 4: FUNCTION WITH TWO PARAMETERS
+// Calculate total cost for quantity purchased
+// ==================================================
+
+function calculateTotalCost(price, quantity) {
+    return price * quantity;
+}
+
+console.log(
+    "Cost of 2 Cardamom packs:",
+    calculateTotalCost(250, 2)
+);
+
+console.log(
+    "Cost of 3 Turmeric packs:",
+    calculateTotalCost(60, 3)
+);
+
+// ==================================================
+// DAY 5 - TASK 5: FUNCTION EXPRESSION
+// ==================================================
+
+const calculateDiscount = function (price, discountPercent) {
+    let discountAmount = price * (discountPercent / 100);
+    return price - discountAmount;
+};
+
+console.log(
+    "Cardamom price after 10% discount:",
+    calculateDiscount(250, 10)
+);
+
+// ==================================================
+// DAY 5 - TASK 6: ARROW FUNCTION
+// ==================================================
+
+const getProductName = (product) => {
+    return product.name;
+};
+
+console.log("First product name:", getProductName(products[0]));
+
+// Short arrow function
+const doublePrice = price => price * 2;
+
+console.log("Double Cardamom price:", doublePrice(250));
+
+// ==================================================
+// DAY 5 - TASK 7: REUSABLE PRODUCT SEARCH FUNCTION
+// ==================================================
+
+function findProduct(productName) {
+    const foundProduct = products.find(
+        product =>
+            product.name.toLowerCase() === productName.toLowerCase()
+    );
+
+    if (foundProduct) {
+        console.log("Product found:", foundProduct.name);
+        console.log("Price:", foundProduct.price);
+        console.log("Stock:", foundProduct.stock);
+        console.log("Category:", foundProduct.category);
+        return foundProduct;
+    } else {
+        console.log("Product not found:", productName);
+        return null;
+    }
+}
+
+findProduct("Cardamom");
+findProduct("Turmeric");
+findProduct("Saffron");
+
+// ==================================================
+// DAY 5 - TASK 8: FUNCTION TO DISPLAY ALL PRODUCTS
+// ==================================================
+
+function displayAllProducts() {
+    console.log("----- ALL SHOP PRODUCTS -----");
+
+    for (const product of products) {
+        console.log(
+            product.name +
+            " - ₹" + product.price +
+            " - Stock: " + product.stock
+        );
+    }
+}
+
+displayAllProducts();
+
+// ==================================================
+// DAY 5 - TASK 9: FUNCTION TO CHECK STOCK
+// ==================================================
+
+function checkProductStock(productName) {
+    const product = findProductByName(productName);
+
+    if (product === null) {
+        return;
+    }
+
+    if (product.stock === 0) {
+        console.log(product.name + " is out of stock.");
+    } else {
+        console.log(product.name + " is available.");
+    }
+}
+
+function findProductByName(productName) {
+    for (const product of products) {
+        if (product.name.toLowerCase() === productName.toLowerCase()) {
+            return product;
+        }
+    }
+
+    return null;
+}
+
+checkProductStock("Clove");
+checkProductStock("Cardamom");
+
+// ==================================================
+// DAY 5 - COMPLETED
+// ==================================================
+
+console.log("Day 5 JavaScript practice completed!");
