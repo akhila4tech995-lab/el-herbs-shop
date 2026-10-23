@@ -4,166 +4,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>EL Herbs and Spices Shop</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <header class="site-header">
-        <div class="container">
-            <h1>🌿 EL Herbs and Spices Shop</h1>
-            <p>Freshness and flavour in every spice</p>
+        <h1 id="pageHeading">EL Herbs and Spices Shop</h1>
+        <p>Fresh flavour, natural goodness!</p>
 
-            <nav>
-                <a href="#home">Home</a>
-                <a href="#products">Our Products</a>
-                <a href="#prices">Price List</a>
-                <a href="#contact">Contact</a>
-                <a href="admin.html">Admin</a>
-            </nav>
-        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#products">Products</a>
+            <a href="#price-list">Price List</a>
+            <a href="#enquiry">Enquiry</a>
+            <a href="admin.html">Admin Tasks</a>
+        </nav>
     </header>
 
-    <main>
-        <section id="home" class="hero container">
-            <h2>Welcome to Our Spice Shop!</h2>
-            <p>Explore our collection of herbs and spices for your kitchen.</p>
-            <a href="#products" class="shop-button">Explore Products</a>
-        </section>
+    <main class="container">
 
-        <section id="products" class="container section">
-            <h2 id="pageHeading">Our Products</h2>
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h2>Welcome to our shop</h2>
+            <p>Explore our herbs and spices for your kitchen.</p>
 
-            <p class="section-description">
-                Search our products or choose a category.
-            </p>
+            <button type="button" id="headingButton">
+                Change Heading
+            </button>
 
-            <div class="featured-area">
+            <button type="button" id="changeImageButton">
+                Change Featured Image
+            </button>
+
+            <div class="featured-image-container">
                 <img
                     id="featuredImage"
                     src="images/cardamom.jpg"
-                    alt="Featured cardamom spice"
-                    width="180"
-                    height="130"
+                    alt="Featured spice"
+                    width="220"
                 >
-
-                <button
-                    type="button"
-                    id="changeImageButton"
-                    class="shop-button"
-                >
-                    Change Featured Image
-                </button>
             </div>
 
-            <div class="product-controls">
+            <p id="cartMessage" aria-live="polite"></p>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products">
+            <h2>Our Products</h2>
+
+            <div class="filter-controls">
+                <label for="searchInput">Search products:</label>
                 <input
-                    type="search"
+                    type="text"
                     id="searchInput"
-                    placeholder="Search spices..."
-                    aria-label="Search products by name"
+                    placeholder="Type a product name..."
                 >
 
-                <select id="categoryFilter" aria-label="Filter by category">
-                    <option value="All">All Categories</option>
-                    <option value="Whole Spices">Whole Spices</option>
-                    <option value="Ground Spices">Ground Spices</option>
-                    <option value="Herbs">Herbs</option>
+                <label for="categoryFilter">Choose category:</label>
+                <select id="categoryFilter">
+                    <option value="all">All categories</option>
+                    <option value="Spice">Spice</option>
+                    <option value="Powder">Powder</option>
+                    <option value="Leaf">Leaf</option>
                 </select>
             </div>
 
-            <p id="productCount" class="product-count" aria-live="polite"></p>
+            <p id="productCount" aria-live="polite"></p>
 
-            <!-- Day 2: feedback for Add to Cart clicks -->
-            <p id="cartMessage" class="cart-message" aria-live="polite">
-                Select a product to try the Add to Cart button.
-            </p>
-
-            <!-- Empty grid: JavaScript creates the product cards -->
             <div id="productGrid" class="product-grid"></div>
-
-            <div class="dom-practice">
-                <button
-                    type="button"
-                    id="headingButton"
-                    class="shop-button"
-                >
-                    Change Heading Style
-                </button>
-            </div>
         </section>
 
-        <section id="prices" class="container section">
-            <h2>Price List</h2>
+        <!-- Price List Section -->
+        <section id="price-list">
+            <h2>Price List (per 100g)</h2>
 
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Price per 100g</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Cardamom</td><td>₹250</td></tr>
-                        <tr><td>Turmeric</td><td>₹60</td></tr>
-                        <tr><td>Black Pepper</td><td>₹120</td></tr>
-                        <tr><td>Cinnamon</td><td>₹80</td></tr>
-                        <tr><td>Clove</td><td>₹100</td></tr>
-                        <tr><td>Ginger Powder</td><td>₹70</td></tr>
-                        <tr><td>Bay Leaf</td><td>₹40</td></tr>
-                        <tr><td>Nutmeg</td><td>₹90</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Cardamom</td>
+                        <td>₹250</td>
+                    </tr>
+                    <tr>
+                        <td>Turmeric</td>
+                        <td>₹60</td>
+                    </tr>
+                    <tr>
+                        <td>Black Pepper</td>
+                        <td>₹120</td>
+                    </tr>
+                    <tr>
+                        <td>Cinnamon</td>
+                        <td>₹80</td>
+                    </tr>
+                    <tr>
+                        <td>Clove</td>
+                        <td>₹100</td>
+                    </tr>
+                    <tr>
+                        <td>Ginger Powder</td>
+                        <td>₹70</td>
+                    </tr>
+                    <tr>
+                        <td>Bay Leaf</td>
+                        <td>₹40</td>
+                    </tr>
+                    <tr>
+                        <td>Nutmeg</td>
+                        <td>₹90</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
-        <section id="contact" class="container section">
-            <h2>Contact Us</h2>
-            <p>Have a question about our products? Send us an enquiry.</p>
+        <!-- Customer Enquiry Section -->
+        <section id="enquiry">
+            <h2>Customer Enquiry</h2>
 
-            <form id="enquiryForm">
-                <label for="customerName">Your name</label>
+            <form id="enquiryForm" novalidate>
+                <label for="customerName">Name:</label>
                 <input
                     type="text"
                     id="customerName"
-                    name="customerName"
-                    placeholder="Enter your name"
                     required
                 >
+                <span id="nameError" class="error-message"></span>
 
-                <label for="customerEmail">Email address</label>
+                <label for="customerEmail">Email:</label>
                 <input
                     type="email"
                     id="customerEmail"
-                    name="customerEmail"
-                    placeholder="Enter your email"
                     required
                 >
+                <span id="emailError" class="error-message"></span>
 
-                <label for="customerMessage">Your message</label>
+                <label for="customerMessage">Message:</label>
                 <textarea
                     id="customerMessage"
-                    name="customerMessage"
-                    placeholder="Write your enquiry"
                     rows="4"
                     required
                 ></textarea>
+                <span id="messageError" class="error-message"></span>
 
-                <button type="submit" class="shop-button">
-                    Send Enquiry
-                </button>
+                <button type="submit">Submit Enquiry</button>
+
+                <p id="formMessage" aria-live="polite"></p>
             </form>
-
-            <p id="formMessage" aria-live="polite"></p>
         </section>
+
+        <!-- JavaScript Array Practice Section -->
+        <section id="array-practice">
+            <h2>JavaScript Array Practice</h2>
+
+            <p>
+                This section demonstrates array methods using sample
+                student scores and the shop's product data.
+            </p>
+
+            <div class="analysis-panel">
+                <h3>Student Score Analysis</h3>
+                <div id="studentResults"></div>
+            </div>
+
+            <div class="analysis-panel">
+                <h3>Product Array Analysis</h3>
+                <div id="productArrayResults"></div>
+            </div>
+        </section>
+
     </main>
 
+    <!-- Footer -->
     <footer class="site-footer">
-        <p>&copy; 2026 EL Herbs and Spices Shop. All rights reserved.</p>
+        <p>&copy; 2026 EL Herbs and Spices Shop</p>
     </footer>
 
-    <!-- Keep all JavaScript in app.js -->
+    <!-- JavaScript File -->
     <script src="js/app.js"></script>
+
 </body>
 </html>
