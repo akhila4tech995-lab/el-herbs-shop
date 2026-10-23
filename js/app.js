@@ -2,13 +2,13 @@
 /*
 ==================================================
 EL HERBS AND SPICES SHOP
-DAY 2 + DAY 3: JAVASCRIPT PRACTICE
+DAY 2 + DAY 3 + DAY 4 JAVASCRIPT PRACTICE
 ==================================================
 */
 
-// --------------------------------------------------
+// ==================================================
 // DAY 2 - TASK 1: VARIABLES
-// --------------------------------------------------
+// ==================================================
 
 console.log("WELCOME TO EL HERBS AND SPICES SHOP!");
 
@@ -22,10 +22,9 @@ console.log("Item Price:", itemPrice);
 console.log("Quantity:", quantity);
 console.log("GST Rate:", gstRate);
 
-
-// --------------------------------------------------
+// ==================================================
 // DAY 2 - TASK 2: ARRAY OF PRODUCT OBJECTS
-// --------------------------------------------------
+// ==================================================
 
 const products = [
     { id: 1, name: "Cardamom", price: 250, stock: 20, category: "Whole Spices" },
@@ -42,10 +41,9 @@ console.log("First Product:", products[0]);
 console.log("Last Product:", products[products.length - 1]);
 console.log("Total Products:", products.length);
 
-
-// --------------------------------------------------
+// ==================================================
 // DAY 2 - TASK 3: OPERATORS
-// --------------------------------------------------
+// ==================================================
 
 let a = 10;
 let b = 5;
@@ -71,13 +69,8 @@ let priceWithGST = itemPrice + (itemPrice * gstRate);
 console.log("Price before GST:", itemPrice);
 console.log("Price after 5% GST:", priceWithGST);
 
-// + joins strings when one operand is a string.
-// Therefore, "10" + 5 gives "105".
-// The - operator converts "10" to a number, so "10" - 5 gives 5.
-
 console.log('"10" + 5:', "10" + 5);
 console.log('"10" - 5:', "10" - 5);
-
 
 // ==================================================
 // DAY 3 - TASK 1: SCOPE
@@ -95,12 +88,7 @@ if (true) {
     console.log("Inside block - const:", constMessage);
 }
 
-// var is function-scoped, not block-scoped.
-// Therefore, varMessage can be used outside this if block.
 console.log("Outside block - var:", varMessage);
-
-// let and const are block-scoped.
-// They cannot be accessed outside the if block.
 
 try {
     console.log(letMessage);
@@ -114,25 +102,15 @@ try {
     console.log("Outside block - const: ReferenceError");
 }
 
-
 // ==================================================
 // DAY 3 - TASK 2: HOISTING
 // ==================================================
 
 console.log("----- DAY 3: HOISTING -----");
 
-// var declarations are hoisted and initialized with undefined.
 console.log("var before assignment:", hoistedVar);
-// Expected output: undefined
-
 var hoistedVar = 100;
-
 console.log("var after assignment:", hoistedVar);
-// Expected output: 100
-
-
-// let declarations are hoisted but remain in the
-// Temporal Dead Zone until their declaration is reached.
 
 try {
     console.log(hoistedLet);
@@ -140,14 +118,8 @@ try {
     console.log("let before declaration: ReferenceError");
 }
 
-// Expected output: ReferenceError
-// Accessing let before its declaration causes an error.
-
 let hoistedLet = 200;
-
 console.log("let after declaration:", hoistedLet);
-// Expected output: 200
-
 
 // ==================================================
 // DAY 3 - TASK 3: CLOSURES
@@ -156,34 +128,178 @@ console.log("let after declaration:", hoistedLet);
 console.log("----- DAY 3: CLOSURES -----");
 
 function makeCartCounter() {
-    // This variable is private to makeCartCounter().
     let count = 0;
 
-    // The returned function remembers the count variable.
     return function () {
         count++;
         return count;
     };
 }
 
-// Create a counter for the shopping cart.
 const addToCart = makeCartCounter();
 
 console.log("Items in cart after first addition:", addToCart());
-// Expected output: 1
-
 console.log("Items in cart after second addition:", addToCart());
-// Expected output: 2
-
 console.log("Items in cart after third addition:", addToCart());
-// Expected output: 3
-
-
-// ==================================================
-// END OF DAY 2 + DAY 3
-// ==================================================
 
 console.log("Day 3 JavaScript practice completed!");
+
+// ==================================================
+// DAY 4 - TASK 1: IF, ELSE IF, ELSE
+// Check stock status of every product
+// ==================================================
+
+console.log("----- DAY 4: STOCK STATUS -----");
+
+for (const product of products) {
+    if (product.stock === 0) {
+        console.log(product.name + ": Out of Stock");
+    } else if (product.stock < 10) {
+        console.log(product.name + ": Low Stock");
+    } else {
+        console.log(product.name + ": In Stock");
+    }
+}
+
+// ==================================================
+// DAY 4 - TASK 2: SWITCH
+// Display a message for each product category
+// ==================================================
+
+console.log("----- DAY 4: PRODUCT CATEGORIES -----");
+
+for (const product of products) {
+    switch (product.category) {
+        case "Whole Spices":
+            console.log(product.name + " belongs to Whole Spices.");
+            break;
+
+        case "Ground Spices":
+            console.log(product.name + " belongs to Ground Spices.");
+            break;
+
+        case "Herbs":
+            console.log(product.name + " belongs to Herbs.");
+            break;
+
+        case "Masala Blends":
+            console.log(product.name + " belongs to Masala Blends.");
+            break;
+
+        default:
+            console.log(product.name + " has an unknown category.");
+    }
+}
+
+// ==================================================
+// DAY 4 - TASK 3: FOR LOOP
+// Display all product names
+// ==================================================
+
+console.log("----- DAY 4: FOR LOOP -----");
+
+for (let i = 0; i < products.length; i++) {
+    console.log(products[i].name);
+}
+
+// ==================================================
+// DAY 4 - TASK 4: WHILE LOOP
+// Display all product names
+// ==================================================
+
+console.log("----- DAY 4: WHILE LOOP -----");
+
+let i = 0;
+
+while (i < products.length) {
+    console.log(products[i].name);
+    i++;
+}
+
+// ==================================================
+// DAY 4 - TASK 5: DO...WHILE LOOP
+// Display all product names
+// ==================================================
+
+console.log("----- DAY 4: DO...WHILE LOOP -----");
+
+let j = 0;
+
+do {
+    console.log(products[j].name);
+    j++;
+} while (j < products.length);
+
+// ==================================================
+// DAY 4 - TASK 6: FOR...OF
+// Read product objects from the array
+// ==================================================
+
+console.log("----- DAY 4: FOR...OF LOOP -----");
+
+for (const product of products) {
+    console.log("Product:", product.name);
+    console.log("Price:", product.price);
+}
+
+// ==================================================
+// DAY 4 - TASK 7: FOR...IN
+// Read property names from one product object
+// ==================================================
+
+console.log("----- DAY 4: FOR...IN LOOP -----");
+
+for (const key in products[0]) {
+    console.log("Property:", key);
+    console.log("Value:", products[0][key]);
+}
+
+// ==================================================
+// DAY 4 - TASK 8: CONTINUE
+// Skip products that are out of stock
+// ==================================================
+
+console.log("----- DAY 4: CONTINUE -----");
+
+for (const product of products) {
+    if (product.stock === 0) {
+        continue;
+    }
+
+    console.log("Available product:", product.name);
+}
+
+// ==================================================
+// DAY 4 - TASK 9: BREAK
+// Stop at the first product priced above ₹500
+// A separate demo item is used so our original
+// eight products and prices remain unchanged.
+// ==================================================
+
+console.log("----- DAY 4: BREAK -----");
+
+const breakDemoProducts = [
+    ...products,
+    {
+        id: 9,
+        name: "Premium Saffron (Demo)",
+        price: 650,
+        stock: 3,
+        category: "Whole Spices"
+    }
+];
+
+for (const product of breakDemoProducts) {
+    if (product.price > 500) {
+        console.log("First product above ₹500:", product.name);
+        console.log("Price:", product.price);
+        break;
+    }
+
+    console.log("Checked product:", product.name);
+}
+
+console.log("Day 4 JavaScript practice completed!");
 
 
 
