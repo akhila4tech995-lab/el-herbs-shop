@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EL Herbs and Spices Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🌿 EL Herbs and Spices Shop</h1>
+        <p>Freshness and flavour in every spice!</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#prices">Price List</a>
+        <a href="#enquiry">Enquiry</a>
+    </nav>
+
+    <main id="home">
+        <section id="products">
+            <h2>Our Products</h2>
+
+            <div class="product-grid">
+                <article class="product-card">
+                    <img src="images/cardamom.jpg" alt="Cardamom">
+                    <h3>Cardamom</h3>
+                    <p>Price: ₹250 / 100g</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="images/turmeric.jpg" alt="Turmeric">
+                    <h3>Turmeric</h3>
+                    <p>Price: ₹60 / 100g</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="images/black-pepper.jpg" alt="Black Pepper">
+                    <h3>Black Pepper</h3>
+                    <p>Price: ₹120 / 100g</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="images/cinnamon.jpg" alt="Cinnamon">
+                    <h3>Cinnamon</h3>
+                    <p>Price: ₹80 / 100g</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="images/clove.jpg" alt="Clove">
+                    <h3>Clove</h3>
+                    <p>Price: ₹100 / 100g</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="images/ginger-powder.jpg" alt="Ginger Powder">
+                    <h3>Ginger Powder</h3>
+                    <p>Price: ₹70 / 100g</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="images/bay-leaf.jpg" alt="Bay Leaf">
+                    <h3>Bay Leaf</h3>
+                    <p>Price: ₹40 / 100g</p>
+                </article>
+
+                <article class="product-card">
+                    <img src="images/nutmeg.jpg" alt="Nutmeg">
+                    <h3>Nutmeg</h3>
+                    <p>Price: ₹90 / 100g</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="prices">
+            <h2>Price List</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price per 100g</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Cardamom</td><td>Whole Spices</td><td>₹250</td></tr>
+                    <tr><td>Turmeric</td><td>Ground Spices</td><td>₹60</td></tr>
+                    <tr><td>Black Pepper</td><td>Whole Spices</td><td>₹120</td></tr>
+                    <tr><td>Cinnamon</td><td>Whole Spices</td><td>₹80</td></tr>
+                    <tr><td>Clove</td><td>Whole Spices</td><td>₹100</td></tr>
+                    <tr><td>Ginger Powder</td><td>Ground Spices</td><td>₹70</td></tr>
+                    <tr><td>Bay Leaf</td><td>Herbs</td><td>₹40</td></tr>
+                    <tr><td>Nutmeg</td><td>Whole Spices</td><td>₹90</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="enquiry">
+            <h2>Customer Enquiry</h2>
+
+            <form>
+                <label for="customerName">Your Name:</label>
+                <input type="text" id="customerName"
+                       name="customerName" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="product">Choose a Product:</label>
+                <select id="product" name="product" required>
+                    <option value="">Select a product</option>
+                    <option>Cardamom</option>
+                    <option>Turmeric</option>
+                    <option>Black Pepper</option>
+                    <option>Cinnamon</option>
+                    <option>Clove</option>
+                    <option>Ginger Powder</option>
+                    <option>Bay Leaf</option>
+                    <option>Nutmeg</option>
+                </select>
+
+                <label for="quantity">Quantity (100g units):</label>
+                <input type="number" id="quantity" name="quantity"
+                       min="1" required>
+
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+
+                <button type="submit">Send Enquiry</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>EL Herbs and Spices Shop</p>
+        <p>Address: Kerala, India</p>
+        <p>&copy; 2026 EL Herbs and Spices Shop</p>
+    </footer>
+
+</body>
+</html>
