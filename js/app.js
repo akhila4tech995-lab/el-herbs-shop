@@ -1,519 +1,337 @@
 
-/*
-==================================================
-EL HERBS AND SPICES SHOP
-WEEK 1: DAY 2 TO DAY 6
-==================================================
-*/
+/* =============================================
+   EL HERBS AND SPICES SHOP
+   WEEK 2 - DAY 1
+   DOM MANIPULATION
+============================================= */
 
-// ==================================================
-// DAY 2: VARIABLES
-// ==================================================
 
-console.log("WELCOME TO EL HERBS AND SPICES SHOP!");
+/* =============================================
+   1. PRODUCTS ARRAY
+============================================= */
 
-var shopName = "EL Herbs and Spices Shop";
-let itemPrice = 250;
-let quantity = 2;
-const gstRate = 0.05;
-
-console.log("Shop Name:", shopName);
-console.log("Item Price:", itemPrice);
-console.log("Quantity:", quantity);
-console.log("GST Rate:", gstRate);
-
-// ==================================================
-// DAY 2: PRODUCT ARRAY
-// ==================================================
-
-const products = [
-    { id: 1, name: "Cardamom", price: 250, stock: 20, category: "Whole Spices" },
-    { id: 2, name: "Turmeric", price: 60, stock: 35, category: "Ground Spices" },
-    { id: 3, name: "Black Pepper", price: 120, stock: 15, category: "Whole Spices" },
-    { id: 4, name: "Cinnamon", price: 80, stock: 8, category: "Whole Spices" },
-    { id: 5, name: "Clove", price: 100, stock: 0, category: "Whole Spices" },
-    { id: 6, name: "Ginger Powder", price: 70, stock: 25, category: "Ground Spices" },
-    { id: 7, name: "Bay Leaf", price: 40, stock: 5, category: "Herbs" },
-    { id: 8, name: "Nutmeg", price: 90, stock: 12, category: "Whole Spices" }
-];
-
-console.log("First Product:", products[0]);
-console.log("Last Product:", products[products.length - 1]);
-console.log("Total Products:", products.length);
-
-// ==================================================
-// DAY 2: OPERATORS
-// ==================================================
-
-let a = 10;
-let b = 5;
-
-console.log("Addition:", a + b);
-console.log("Subtraction:", a - b);
-console.log("Multiplication:", a * b);
-console.log("Division:", a / b);
-console.log("Remainder:", a % b);
-
-console.log("10 == '10':", 10 == "10");
-console.log("10 === '10':", 10 === "10");
-
-let inStock = true;
-let isLoggedIn = false;
-
-console.log("AND:", inStock && isLoggedIn);
-console.log("OR:", inStock || isLoggedIn);
-console.log("NOT inStock:", !inStock);
-
-let priceWithGST = itemPrice + itemPrice * gstRate;
-
-console.log("Price before GST:", itemPrice);
-console.log("Price after 5% GST:", priceWithGST);
-console.log('"10" + 5:', "10" + 5);
-console.log('"10" - 5:', "10" - 5);
-
-// ==================================================
-// DAY 3: SCOPE
-// ==================================================
-
-console.log("----- DAY 3: SCOPE -----");
-
-if (true) {
-    var varMessage = "I am var";
-    let letMessage = "I am let";
-    const constMessage = "I am const";
-
-    console.log("Inside block - var:", varMessage);
-    console.log("Inside block - let:", letMessage);
-    console.log("Inside block - const:", constMessage);
-}
-
-console.log("Outside block - var:", varMessage);
-
-try {
-    console.log(letMessage);
-} catch (error) {
-    console.log("Outside block - let: ReferenceError");
-}
-
-try {
-    console.log(constMessage);
-} catch (error) {
-    console.log("Outside block - const: ReferenceError");
-}
-
-// ==================================================
-// DAY 3: HOISTING
-// ==================================================
-
-console.log("----- DAY 3: HOISTING -----");
-
-console.log("var before assignment:", hoistedVar);
-var hoistedVar = 100;
-console.log("var after assignment:", hoistedVar);
-
-try {
-    console.log(hoistedLet);
-} catch (error) {
-    console.log("let before declaration: ReferenceError");
-}
-
-let hoistedLet = 200;
-console.log("let after declaration:", hoistedLet);
-
-// ==================================================
-// DAY 3: CLOSURES
-// ==================================================
-
-console.log("----- DAY 3: CLOSURES -----");
-
-function makeCartCounter() {
-    let count = 0;
-
-    return function () {
-        count++;
-        return count;
-    };
-}
-
-const addToCart = makeCartCounter();
-
-console.log("Cart after first addition:", addToCart());
-console.log("Cart after second addition:", addToCart());
-console.log("Cart after third addition:", addToCart());
-
-// ==================================================
-// DAY 4: CONDITIONS
-// ==================================================
-
-console.log("----- DAY 4: STOCK STATUS -----");
-
-for (const product of products) {
-    if (product.stock === 0) {
-        console.log(product.name + ": Out of Stock");
-    } else if (product.stock < 10) {
-        console.log(product.name + ": Low Stock");
-    } else {
-        console.log(product.name + ": In Stock");
-    }
-}
-
-// ==================================================
-// DAY 4: SWITCH
-// ==================================================
-
-console.log("----- DAY 4: CATEGORIES -----");
-
-for (const product of products) {
-    switch (product.category) {
-        case "Whole Spices":
-            console.log(product.name + ": Whole Spices");
-            break;
-        case "Ground Spices":
-            console.log(product.name + ": Ground Spices");
-            break;
-        case "Herbs":
-            console.log(product.name + ": Herbs");
-            break;
-        case "Masala Blends":
-            console.log(product.name + ": Masala Blends");
-            break;
-        default:
-            console.log(product.name + ": Unknown category");
-    }
-}
-
-// ==================================================
-// DAY 4: FOR LOOP
-// ==================================================
-
-console.log("----- DAY 4: FOR LOOP -----");
-
-for (let i = 0; i < products.length; i++) {
-    console.log(products[i].name);
-}
-
-// ==================================================
-// DAY 4: WHILE LOOP
-// ==================================================
-
-console.log("----- DAY 4: WHILE LOOP -----");
-
-let i = 0;
-
-while (i < products.length) {
-    console.log(products[i].name);
-    i++;
-}
-
-// ==================================================
-// DAY 4: DO...WHILE LOOP
-// ==================================================
-
-console.log("----- DAY 4: DO...WHILE LOOP -----");
-
-let j = 0;
-
-do {
-    console.log(products[j].name);
-    j++;
-} while (j < products.length);
-
-// ==================================================
-// DAY 4: FOR...OF
-// ==================================================
-
-console.log("----- DAY 4: FOR...OF -----");
-
-for (const product of products) {
-    console.log("Product:", product.name, "Price:", product.price);
-}
-
-// ==================================================
-// DAY 4: FOR...IN
-// ==================================================
-
-console.log("----- DAY 4: FOR...IN -----");
-
-for (const key in products[0]) {
-    console.log("Property:", key, "Value:", products[0][key]);
-}
-
-// ==================================================
-// DAY 4: CONTINUE
-// ==================================================
-
-console.log("----- DAY 4: CONTINUE -----");
-
-for (const product of products) {
-    if (product.stock === 0) {
-        continue;
-    }
-
-    console.log("Available product:", product.name);
-}
-
-// ==================================================
-// DAY 4: BREAK
-// ==================================================
-
-console.log("----- DAY 4: BREAK -----");
-
-const breakDemoProducts = [
-    ...products,
+const shopProducts = [
     {
-        id: 9,
-        name: "Premium Saffron (Demo)",
-        price: 650,
-        stock: 3,
-        category: "Whole Spices"
+        id: 1,
+        name: "Cardamom",
+        price: 250,
+        stock: 20,
+        category: "Whole Spices",
+        icon: "🌿"
+    },
+    {
+        id: 2,
+        name: "Turmeric",
+        price: 60,
+        stock: 35,
+        category: "Ground Spices",
+        icon: "🟡"
+    },
+    {
+        id: 3,
+        name: "Black Pepper",
+        price: 120,
+        stock: 15,
+        category: "Whole Spices",
+        icon: "⚫"
+    },
+    {
+        id: 4,
+        name: "Cinnamon",
+        price: 80,
+        stock: 8,
+        category: "Whole Spices",
+        icon: "🪵"
+    },
+    {
+        id: 5,
+        name: "Clove",
+        price: 100,
+        stock: 0,
+        category: "Whole Spices",
+        icon: "🌰"
+    },
+    {
+        id: 6,
+        name: "Ginger Powder",
+        price: 70,
+        stock: 25,
+        category: "Ground Spices",
+        icon: "🫚"
+    },
+    {
+        id: 7,
+        name: "Bay Leaf",
+        price: 40,
+        stock: 5,
+        category: "Herbs",
+        icon: "🍃"
+    },
+    {
+        id: 8,
+        name: "Nutmeg",
+        price: 90,
+        stock: 12,
+        category: "Whole Spices",
+        icon: "🌰"
     }
 ];
 
-for (const product of breakDemoProducts) {
-    if (product.price > 500) {
-        console.log("First product above ₹500:", product.name);
-        break;
+
+/* =============================================
+   2. SELECT HTML ELEMENTS
+============================================= */
+
+// # selects an element by its ID.
+const productGrid = document.querySelector("#productGrid");
+const pageHeading = document.querySelector("#pageHeading");
+const featuredImage = document.querySelector("#featuredImage");
+
+const searchInput = document.querySelector("#searchInput");
+const categoryFilter = document.querySelector("#categoryFilter");
+const productCount = document.querySelector("#productCount");
+
+const headingButton = document.querySelector("#headingButton");
+const changeImageButton = document.querySelector("#changeImageButton");
+
+const enquiryForm = document.querySelector("#enquiryForm");
+const formMessage = document.querySelector("#formMessage");
+
+
+/* =============================================
+   3. TASK 1: CHANGE HEADING AND CSS CLASS
+============================================= */
+
+function practiseDOMManipulation() {
+    // Change the heading text using textContent.
+    pageHeading.textContent = "Explore Our Herbs and Spices";
+
+    // Toggle the CSS class on the heading.
+    pageHeading.classList.toggle("highlight-heading");
+}
+
+// Run the function when the button is clicked.
+headingButton.addEventListener("click", practiseDOMManipulation);
+
+
+/* =============================================
+   4. CHANGE IMAGE USING setAttribute()
+============================================= */
+
+let showingCardamomImage = true;
+
+changeImageButton.addEventListener("click", function () {
+    if (showingCardamomImage) {
+        featuredImage.setAttribute("src", "images/turmeric.jpg");
+        featuredImage.setAttribute("alt", "Featured turmeric spice");
+    } else {
+        featuredImage.setAttribute("src", "images/cardamom.jpg");
+        featuredImage.setAttribute("alt", "Featured cardamom spice");
     }
 
-    console.log("Checked product:", product.name);
-}
+    showingCardamomImage = !showingCardamomImage;
+});
 
-// ==================================================
-// DAY 5: FUNCTION DECLARATION
-// ==================================================
 
-console.log("----- DAY 5: FUNCTIONS -----");
+/* =============================================
+   5. TASK 2: renderProducts(list)
+============================================= */
 
-function displayWelcomeMessage() {
-    console.log("Welcome to EL Herbs and Spices Shop!");
-}
+function renderProducts(list) {
+    // Remove the old product cards.
+    productGrid.replaceChildren();
 
-displayWelcomeMessage();
+    // Display how many products match.
+    productCount.textContent = list.length + " product(s) found";
 
-// ==================================================
-// DAY 5: FUNCTION WITH PARAMETERS
-// ==================================================
+    // Display a message if no products match.
+    if (list.length === 0) {
+        const message = document.createElement("p");
 
-function displayProduct(productName) {
-    console.log("Product selected:", productName);
-}
+        message.classList.add("no-products");
+        message.textContent = "No matching products found.";
 
-displayProduct("Cardamom");
-displayProduct("Turmeric");
-displayProduct("Black Pepper");
-
-// ==================================================
-// DAY 5: RETURN AND GST
-// ==================================================
-
-function calculatePriceWithGST(price) {
-    return price + price * gstRate;
-}
-
-console.log("Cardamom with GST:", calculatePriceWithGST(250));
-console.log("Turmeric with GST:", calculatePriceWithGST(60));
-
-// ==================================================
-// DAY 5: TOTAL COST
-// ==================================================
-
-function calculateTotalCost(price, quantity) {
-    return price * quantity;
-}
-
-console.log("Two Cardamom packs:", calculateTotalCost(250, 2));
-console.log("Three Turmeric packs:", calculateTotalCost(60, 3));
-
-// ==================================================
-// DAY 5: FUNCTION EXPRESSION
-// ==================================================
-
-const calculateDiscount = function (price, discountPercent) {
-    const discountAmount = price * discountPercent / 100;
-    return price - discountAmount;
-};
-
-console.log("Cardamom after 10% discount:", calculateDiscount(250, 10));
-
-// ==================================================
-// DAY 5: ARROW FUNCTION
-// ==================================================
-
-const getProductName = product => product.name;
-const doublePrice = price => price * 2;
-
-console.log("First product:", getProductName(products[0]));
-console.log("Double Cardamom price:", doublePrice(250));
-
-// ==================================================
-// DAY 5: SEARCH FOR A PRODUCT
-// ==================================================
-
-function findProductByName(productName) {
-    for (const product of products) {
-        if (product.name.toLowerCase() === productName.toLowerCase()) {
-            return product;
-        }
-    }
-
-    return null;
-}
-
-function findProduct(productName) {
-    const product = findProductByName(productName);
-
-    if (product === null) {
-        console.log("Product not found:", productName);
-        return null;
-    }
-
-    console.log("Product found:", product.name);
-    console.log("Price:", product.price);
-    console.log("Stock:", product.stock);
-    console.log("Category:", product.category);
-
-    return product;
-}
-
-findProduct("Cardamom");
-findProduct("Turmeric");
-findProduct("Saffron");
-
-// ==================================================
-// DAY 5: DISPLAY ALL PRODUCTS
-// ==================================================
-
-function displayAllProducts() {
-    console.log("----- ALL SHOP PRODUCTS -----");
-
-    for (const product of products) {
-        console.log(
-            product.name +
-            " - ₹" + product.price +
-            " - Stock: " + product.stock
-        );
-    }
-}
-
-displayAllProducts();
-
-// ==================================================
-// DAY 5: CHECK STOCK
-// ==================================================
-
-function checkProductStock(productName) {
-    const product = findProductByName(productName);
-
-    if (product === null) {
-        console.log("Cannot check stock. Product not found:", productName);
+        productGrid.appendChild(message);
         return;
     }
 
-    if (product.stock === 0) {
-        console.log(product.name + " is out of stock.");
-    } else {
-        console.log(product.name + " is available.");
+    // Loop through each product in the array.
+    for (const product of list) {
+        // Create a product card.
+        const card = document.createElement("article");
+        card.classList.add("product-card");
+
+        // Create the icon.
+        const icon = document.createElement("div");
+        icon.classList.add("product-icon");
+        icon.textContent = product.icon;
+
+        // Create the name.
+        const name = document.createElement("h3");
+        name.textContent = product.name;
+
+        // Create the category.
+        const category = document.createElement("p");
+        category.classList.add("product-category");
+        category.textContent = "Category: " + product.category;
+
+        // Create the price.
+        const price = document.createElement("p");
+        price.classList.add("product-price");
+        price.textContent = "₹" + product.price + " / 100g";
+
+        // Create the stock information.
+        const stock = document.createElement("p");
+        stock.classList.add("product-stock");
+
+        // Add the appropriate class according to stock.
+        if (product.stock === 0) {
+            card.classList.add("out-of-stock");
+            stock.textContent = "Out of Stock";
+        } else if (product.stock < 10) {
+            card.classList.add("low-stock");
+            stock.textContent = "Low Stock: " + product.stock;
+        } else {
+            card.classList.add("in-stock");
+            stock.textContent = "In Stock: " + product.stock;
+        }
+
+        // Add each element to the product card.
+        card.appendChild(icon);
+        card.appendChild(name);
+        card.appendChild(category);
+        card.appendChild(price);
+        card.appendChild(stock);
+
+        // Add the product card to the grid.
+        productGrid.appendChild(card);
     }
 }
 
-checkProductStock("Clove");
-checkProductStock("Cardamom");
 
-// ==================================================
-// DAY 6: INTEGRATION TESTS
-// Check whether the main functions work correctly
-// ==================================================
+/* =============================================
+   6. TASK 3: SEARCH AND CATEGORY FILTER
+============================================= */
 
-console.log("----- DAY 6: INTEGRATION TESTS -----");
+function filterProducts() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    const selectedCategory = categoryFilter.value;
 
-let passedTests = 0;
-let failedTests = 0;
+    // filter() returns products that match both conditions.
+    const filteredProducts = shopProducts.filter(function (product) {
+        const matchesSearch =
+            product.name.toLowerCase().includes(searchTerm);
 
-function runTest(testName, actual, expected) {
-    if (actual === expected) {
-        console.log("PASS:", testName);
-        passedTests++;
-    } else {
-        console.error(
-            "FAIL:", testName,
-            "| Expected:", expected,
-            "| Received:", actual
-        );
-        failedTests++;
-    }
+        const matchesCategory =
+            selectedCategory === "All" ||
+            product.category === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+    });
+
+    renderProducts(filteredProducts);
 }
 
-// Test 1: Correct number of products
-runTest("There are 8 products", products.length, 8);
+// Search when the user types.
+searchInput.addEventListener("input", filterProducts);
 
-// Test 2: First product name
-runTest("First product is Cardamom", products[0].name, "Cardamom");
+// Filter when the category changes.
+categoryFilter.addEventListener("change", filterProducts);
 
-// Test 3: Find an existing product
-runTest(
-    "Find Cardamom",
-    findProductByName("Cardamom")?.price,
-    250
-);
 
-// Test 4: Search is not case-sensitive
-runTest(
-    "Search ignores uppercase and lowercase",
-    findProductByName("tUrMeRiC")?.price,
-    60
-);
+/* =============================================
+   7. CORRECT SELECTOR EXAMPLES
+============================================= */
 
-// Test 5: Missing product returns null
-runTest(
-    "Missing product returns null",
-    findProductByName("Saffron"),
-    null
-);
+/*
+Incorrect:
+document.querySelector("productGrid");
 
-// Test 6: GST calculation
-runTest(
-    "Cardamom price with 5% GST",
-    calculatePriceWithGST(250),
-    262.5
-);
+Correct:
+document.querySelector("#productGrid");
 
-// Test 7: Total cost calculation
-runTest(
-    "Two Cardamom packs cost ₹500",
-    calculateTotalCost(250, 2),
-    500
-);
+Explanation:
+# selects an ID.
+. selects a class.
+A plain tag name selects an HTML element.
+*/
 
-// Test 8: Discount calculation
-runTest(
-    "10% discount on ₹250 gives ₹225",
-    calculateDiscount(250, 10),
-    225
-);
+/*
+Incorrect: using a class selector for an ID.
+document.querySelector(".pageHeading");
 
-// Test 9: Clove stock is zero
-runTest(
-    "Clove is out of stock",
-    findProductByName("Clove")?.stock,
-    0
-);
+Correct:
+document.querySelector("#pageHeading");
+*/
 
-// Test 10: Turmeric stock is available
-runTest(
-    "Turmeric has stock",
-    findProductByName("Turmeric").stock > 0,
-    true
-);
+/*
+Incorrect:
+document.querySelectorAll(".product-card").style.color = "green";
 
-// Display test summary
-console.log("----- TEST SUMMARY -----");
-console.log("Tests passed:", passedTests);
-console.log("Tests failed:", failedTests);
+querySelectorAll() returns a NodeList, not one element.
+Loop through the elements to apply a style to each one.
+*/
 
-if (failedTests === 0) {
-    console.log("All tests passed!");
-} else {
-    console.error("Some tests failed. Check the error messages above.");
+function practiseNodeListStyling() {
+    const cards = document.querySelectorAll(".product-card");
+
+    cards.forEach(function (card) {
+        card.style.color = "#285943";
+    });
 }
 
-console.log("Week 1 JavaScript practice completed!");
+
+/* =============================================
+   8. textContent vs innerHTML
+============================================= */
+
+/*
+textContent treats the value as plain text.
+
+Example:
+element.textContent = "<strong>Hello</strong>";
+
+The tags are displayed as text.
+
+innerHTML interprets the string as HTML.
+
+Example:
+element.innerHTML = "<strong>Hello</strong>";
+
+Hello appears in bold.
+
+SECURITY:
+Do not use innerHTML to display untrusted user input.
+It can create a cross-site scripting (XSS) risk.
+Use textContent when displaying ordinary user-provided text.
+*/
+
+
+/* =============================================
+   9. ENQUIRY FORM
+============================================= */
+
+enquiryForm.addEventListener("submit", function (event) {
+    // Stop the browser from reloading the page.
+    event.preventDefault();
+
+    formMessage.textContent =
+        "Thank you! Your form was checked, but no enquiry was sent to a server.";
+
+    enquiryForm.reset();
+});
+
+/*
+addEventListener() is preferred over an onclick HTML attribute
+because it keeps JavaScript separate from HTML and allows
+multiple event listeners to be registered for the same event.
+*/
+
+
+/* =============================================
+   10. DISPLAY PRODUCTS WHEN PAGE LOADS
+============================================= */
+
+renderProducts(shopProducts);
+
+console.log("Week 2 Day 1: DOM manipulation is ready.");
