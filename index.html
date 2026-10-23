@@ -2,149 +2,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EL Herbs and Spices Shop</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EL Herbs and Spices Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
 </head>
 <body>
-    <header class="site-header">
-        <h1 id="pageHeading">EL Herbs and Spices Shop</h1>
-        <p>Fresh flavour, natural goodness!</p>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="#products">Products</a>
-            <a href="#price-list">Price List</a>
-            <a href="#enquiry">Enquiry</a>
-            <a href="#array-practice">Array Practice</a>
-            <a href="admin.html">Admin Tasks</a>
-        </nav>
-    </header>
+  <header class="site-header">
+    <div class="container">
+      <h1>EL Herbs and Spices Shop</h1>
+      <p>Natural flavours for your kitchen</p>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="#products">Products</a>
+        <a href="#prices">Price List</a>
+        <a href="#enquiry">Contact</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container">
-        <section class="welcome-section">
-            <h2>Welcome to our shop</h2>
-            <p>Explore our herbs and spices for your kitchen.</p>
-            <button type="button" id="headingButton">Change Heading</button>
-            <button type="button" id="changeImageButton">Change Featured Image</button>
-            <div class="featured-image-container">
-                <img id="featuredImage"
-                     src="images/cardamom.jpg"
-                     alt="Featured spice"
-                     width="220">
-            </div>
-            <p id="cartMessage" aria-live="polite"></p>
-        </section>
+  <main class="container">
+    <section class="welcome">
+      <h2 id="pageHeading">Welcome to EL Herbs and Spices</h2>
+      <p>Explore our collection of herbs, spices, and kitchen essentials.</p>
+      <button type="button" id="headingButton">Change Welcome Message</button>
 
-        <section id="products">
-            <h2>Our Products</h2>
-            <div class="filter-controls">
-                <div>
-                    <label for="searchInput">Search products:</label>
-                    <input type="text" id="searchInput"
-                           placeholder="Type a product name...">
-                </div>
-                <div>
-                    <label for="categoryFilter">Choose category:</label>
-                    <select id="categoryFilter">
-                        <option value="all">All categories</option>
-                        <option value="Spice">Spice</option>
-                        <option value="Powder">Powder</option>
-                        <option value="Leaf">Leaf</option>
-                    </select>
-                </div>
-            </div>
-            <p id="productCount" aria-live="polite"></p>
-            <div id="productGrid" class="product-grid"></div>
-        </section>
+      <div class="image-demo">
+        <img
+          id="featuredImage"
+          src="images/spices.jpg"
+          alt="A collection of colourful spices"
+          onerror="this.style.display='none'"
+        >
+        <button type="button" id="changeImageButton">Show Image Information</button>
+      </div>
+    </section>
 
-        <section id="price-list">
-            <h2>Price List (per 100g)</h2>
-            <table>
-                <thead>
-                    <tr><th>Product</th><th>Price</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Cardamom</td><td>₹250</td></tr>
-                    <tr><td>Turmeric</td><td>₹60</td></tr>
-                    <tr><td>Black Pepper</td><td>₹120</td></tr>
-                    <tr><td>Cinnamon</td><td>₹80</td></tr>
-                    <tr><td>Clove</td><td>₹100</td></tr>
-                    <tr><td>Ginger Powder</td><td>₹70</td></tr>
-                    <tr><td>Bay Leaf</td><td>₹40</td></tr>
-                    <tr><td>Nutmeg</td><td>₹90</td></tr>
-                </tbody>
-            </table>
-        </section>
+    <section id="products">
+      <h2>Our Products</h2>
 
-        <section id="enquiry">
-            <h2>Customer Enquiry Form</h2>
-            <p>Complete the fields below. This is a learning demo; it does not send data to a server.</p>
+      <div class="filter-controls">
+        <label for="searchInput">Search products</label>
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Search by product name..."
+        >
 
-            <form id="enquiryForm" novalidate>
-                <label for="customerName">Full name:</label>
-                <input type="text" id="customerName" name="customerName"
-                       autocomplete="name" required>
-                <span id="nameError" class="error-message" aria-live="polite"></span>
+        <label for="categoryFilter">Filter by category</label>
+        <select id="categoryFilter">
+          <option value="all">All categories</option>
+        </select>
 
-                <label for="customerEmail">Email:</label>
-                <input type="email" id="customerEmail" name="customerEmail"
-                       autocomplete="email" required>
-                <span id="emailError" class="error-message" aria-live="polite"></span>
+        <button type="button" id="searchButton">Search</button>
+        <button type="button" id="clearSearchButton" class="secondary-button">
+          Clear
+        </button>
+      </div>
 
-                <label for="customerPassword">Password:</label>
-                <input type="password" id="customerPassword" name="customerPassword"
-                       autocomplete="new-password" required minlength="8">
-                <span id="passwordError" class="error-message" aria-live="polite"></span>
+      <p id="searchStatus" class="status-message" aria-live="polite"></p>
+      <p id="loadingMessage" class="status-message" aria-live="polite">
+        Products will load shortly...
+      </p>
+      <p id="productCount" aria-live="polite"></p>
 
-                <label for="confirmPassword">Confirm password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword"
-                       autocomplete="new-password" required>
-                <span id="confirmPasswordError" class="error-message" aria-live="polite"></span>
+      <div id="productGrid" class="product-grid">
+        <p>Loading products...</p>
+      </div>
 
-                <label for="customerPhone">Phone number (10 digits):</label>
-                <input type="tel" id="customerPhone" name="customerPhone"
-                       inputmode="numeric" autocomplete="tel"
-                       placeholder="9876543210" required>
-                <span id="phoneError" class="error-message" aria-live="polite"></span>
+      <div class="cart-section">
+        <h3>Your Cart</h3>
+        <p id="cartMessage" aria-live="polite">Your cart is empty.</p>
+        <ul id="cartList"></ul>
+        <p id="cartTotal"><strong>Total: ₹0</strong></p>
+        <button type="button" id="clearCartButton" class="secondary-button">
+          Clear Cart
+        </button>
+      </div>
+    </section>
 
-                <label for="customerMessage">Message:</label>
-                <textarea id="customerMessage" name="customerMessage"
-                          rows="4" required></textarea>
-                <span id="messageError" class="error-message" aria-live="polite"></span>
+    <section id="prices">
+      <h2>Price List</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Price per 100g</th>
+              <th>Stock</th>
+            </tr>
+          </thead>
+          <tbody id="priceTableBody">
+            <tr>
+              <td colspan="4">Loading price list...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-                <button type="submit">Validate Enquiry</button>
-                <button type="reset">Reset Form</button>
-                <p id="formMessage" aria-live="polite"></p>
-            </form>
+    <section>
+      <h2>Product Data Analysis</h2>
+      <div id="productArrayResults" class="information-panel">
+        Product analysis will appear here.
+      </div>
+      <h3>Student Results Practice</h3>
+      <div id="studentResults" class="information-panel">
+        Student array practice results will appear here.
+      </div>
+    </section>
 
-            <div class="analysis-panel">
-                <h3>Safe Text Demo</h3>
-                <p>Type text below to see how textContent displays it safely.</p>
-                <label for="safeTextInput">Enter text (try typing HTML tags):</label>
-                <input type="text" id="safeTextInput"
-                       placeholder="Example: <b>Hello</b>">
-                <p id="safeTextOutput" class="safe-output"></p>
-            </div>
-        </section>
+    <section id="enquiry">
+      <h2>Customer Enquiry Form</h2>
+      <p>Fill in the form to practise client-side form validation.</p>
 
-        <section id="array-practice">
-            <h2>JavaScript Array Practice</h2>
-            <div class="analysis-panel">
-                <h3>Student Score Analysis</h3>
-                <div id="studentResults"></div>
-            </div>
-            <div class="analysis-panel">
-                <h3>Product Array Analysis</h3>
-                <div id="productArrayResults"></div>
-            </div>
-        </section>
-    </main>
+      <form id="enquiryForm" novalidate>
+        <div class="form-group">
+          <label for="customerName">Full name</label>
+          <input type="text" id="customerName" autocomplete="name" required>
+          <small id="customerNameError" class="error-message"></small>
+        </div>
 
-    <footer class="site-footer">
-        <p>&copy; 2026 EL Herbs and Spices Shop</p>
-    </footer>
+        <div class="form-group">
+          <label for="customerEmail">Email address</label>
+          <input type="email" id="customerEmail" autocomplete="email" required>
+          <small id="customerEmailError" class="error-message"></small>
+        </div>
 
-    <script src="js/app.js"></script>
+        <div class="form-group">
+          <label for="customerPassword">Password (at least 8 characters)</label>
+          <input type="password" id="customerPassword" required>
+          <small id="customerPasswordError" class="error-message"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm password</label>
+          <input type="password" id="confirmPassword" required>
+          <small id="confirmPasswordError" class="error-message"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="customerPhone">Phone number (10 digits)</label>
+          <input type="tel" id="customerPhone" inputmode="numeric" required>
+          <small id="customerPhoneError" class="error-message"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="customerMessage">Your message</label>
+          <textarea id="customerMessage" rows="4" required></textarea>
+          <small id="customerMessageError" class="error-message"></small>
+        </div>
+
+        <button type="submit">Validate Enquiry</button>
+        <p id="formMessage" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section>
+      <h2>Safe Text Practice</h2>
+      <p>This section demonstrates displaying user input as text safely.</p>
+      <label for="safeTextInput">Enter some text</label>
+      <input type="text" id="safeTextInput" placeholder="Type something...">
+      <button type="button" id="safeTextButton">Display Text</button>
+      <p id="safeTextOutput" class="information-panel"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 EL Herbs and Spices Shop. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
